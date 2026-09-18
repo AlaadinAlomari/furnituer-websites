@@ -1,30 +1,41 @@
 # assets/
 
-`index.html` and `index-ar.html` expect these files here:
+`index.html` expects these files here:
 
-| File | Used by | Size |
+| File | Used by | Width |
 |---|---|---|
-| `hero.webp` | Hero | 1800w |
-| `bedroom.webp` `majlis.webp` `dining.webp` `decor.webp` | Collections + lookbook | 1000w |
-| `showroom.webp` | Showroom section | 1600w |
-| `armchair.webp` | Lookbook (tall tile) | 900w |
-| `swatches.webp` | Lookbook | 1200w |
+| `hero.webp` | Hero | 1800 |
+| `bedroom.webp` `majlis.webp` `dining.webp` `decor.webp` | Collections + lookbook | 1000 |
+| `showroom.webp` | Showroom section | 1600 |
+| `armchair.webp` | Lookbook (tall tile) | 900 |
+| `swatches.webp` | Lookbook | 1200 |
 | `og.jpg` | Social sharing card | 1200×630 |
 | `favicon.svg` | Browser tab | ✔ committed |
 
-Eight original photographs were generated for this site. They could not be
-downloaded into the repository from the build environment, because its network
-policy blocks the image CDN they were delivered on.
+## The photographs
 
-**To add them, run once, from the repository root:**
+Eight original photographs were generated for this site. They could **not** be
+downloaded into the repository from the build environment: its network policy
+blocks the CDN they were delivered on, and that policy must be reported rather
+than worked around.
 
-```bash
-bash assets/fetch-assets.sh
-```
+Two ways to add them:
 
-That downloads all eight and converts them to the sizes above. The source URLs
-are temporary, so run it soon — if they have expired, regenerate the images and
-update the URLs at the top of the script.
+1. **Run the script** from the repository root — it downloads all eight and
+   converts them to the sizes above:
+   ```bash
+   bash assets/fetch-assets.sh
+   ```
+   The source URLs are temporary. If they have expired the script will say so,
+   and the images need regenerating.
 
-Until the files are present the pages still lay out correctly; each image slot
-renders as a warm neutral block.
+2. **Drop the files in by hand.** Save them into this folder using the names in
+   the table. WebP is preferred; if you only have JPG or PNG, either convert
+   them or rename the references in `index.html`.
+
+## Until then
+
+The page does not look broken. Every image sits in a `.ph` frame that shows a
+warm branded tile with a MOBILIA watermark, so missing photos read as a design
+choice rather than a fault. The layout reserves the exact final dimensions, so
+nothing shifts when the real images land.

@@ -12,7 +12,11 @@ B="https://d8j0ntlcm91z4.cloudfront.net/user_3AevcWOtWtwmpG3nZjjNAiSukko"
 
 fetch() { # name url width
   echo "→ $1"
-  curl -sSL --retry 3 "$2" -o "_raw_$1.png"
+  if ! curl -fsSL --retry 3 "$2" -o "_raw_$1.png"; then
+    echo "   FAILED — the temporary source URL has most likely expired."
+    echo "   Regenerate the images and update the URLs at the bottom of this script."
+    rm -f "_raw_$1.png"; return 1
+  fi
   if command -v magick >/dev/null 2>&1; then
     magick "_raw_$1.png" -resize "$3x" -strip -quality 72 "$1.webp"
   elif command -v convert >/dev/null 2>&1; then

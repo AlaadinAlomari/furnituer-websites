@@ -8,8 +8,6 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="./">
-<link rel="alternate" hreflang="ar" href="./index-ar.html">
-<link rel="alternate" hreflang="en" href="./index.html">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_QA">
@@ -66,11 +64,24 @@
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
   margin:0;background:var(--white);color:var(--ink);
+  -webkit-tap-highlight-color:rgba(240,74,124,.14);
+  text-size-adjust:100%;
   font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
   font-size:16px;line-height:1.75;font-weight:400;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
-img{max-width:100%;height:auto;display:block;background:var(--sand-2);color:var(--ink-3);font-size:.72rem}
+img{max-width:100%;height:auto;display:block}
+
+/* Every photo sits in a .ph frame. Before the image paints — or if the file is
+   missing — the frame shows a warm branded tile instead of a broken icon. */
+.ph{position:relative;overflow:hidden;background:linear-gradient(135deg,#f0e9e2 0%,#e4dad0 55%,#d8cdc1 100%)}
+.ph::before{
+  content:"MOBILIA";position:absolute;inset:0;display:grid;place-items:center;
+  font-family:"Playfair Display",Georgia,serif;font-size:.72rem;font-weight:600;
+  letter-spacing:.34em;color:rgba(26,26,26,.17);text-indent:.34em;
+}
+.ph img{position:relative;z-index:1;background:transparent}
+.ph img.is-missing{visibility:hidden}
 a{color:inherit;text-decoration:none}
 button,input,textarea{font:inherit;color:inherit}
 h1,h2,h3,h4{margin:0;line-height:1.16;font-weight:600;letter-spacing:-.022em}
@@ -113,8 +124,8 @@ section[id]{scroll-margin-top:78px}
 
 .ulink{
   display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
-  font-weight:600;font-size:.88rem;color:var(--ink);
-  padding-bottom:4px;border-bottom:1.5px solid var(--pink);
+  min-height:44px;font-weight:600;font-size:.88rem;color:var(--ink);
+  border-bottom:1.5px solid var(--pink);
   transition:color var(--t);
 }
 .ulink svg{width:14px;height:14px;transition:transform var(--t)}
@@ -131,7 +142,7 @@ section[id]{scroll-margin-top:78px}
   border-bottom:1px solid var(--line);
 }
 .header-in{display:flex;align-items:center;gap:14px;min-height:68px}
-.brand{display:flex;flex-direction:column;line-height:1;margin-right:auto}
+.brand{display:flex;flex-direction:column;justify-content:center;line-height:1;min-height:44px;margin-right:auto}
 .brand .mark{font-family:"Playfair Display",Georgia,serif;font-weight:700;font-size:1.34rem;letter-spacing:.05em}
 .brand .mark em{font-style:normal;color:var(--pink)}
 .brand .sub{font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-3);margin-top:6px;font-weight:500}
@@ -146,12 +157,6 @@ section[id]{scroll-margin-top:78px}
 .header-phone:hover{color:var(--pink)}
 .header-phone svg{width:16px;height:16px;color:var(--pink)}
 
-.lang{
-  display:inline-flex;align-items:center;min-height:38px;padding:0 13px;border-radius:999px;
-  border:1px solid var(--line);font-size:.78rem;font-weight:600;letter-spacing:.06em;
-  transition:border-color var(--t),color var(--t);
-}
-.lang:hover{border-color:var(--ink)}
 
 .burger{
   display:inline-flex;flex-direction:column;justify-content:center;gap:5px;
@@ -184,7 +189,8 @@ section[id]{scroll-margin-top:78px}
 .hero-meta svg{width:15px;height:15px;color:var(--pink);flex:none}
 
 .hero-media{position:relative}
-.hero-media img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r-lg);box-shadow:var(--sh-md)}
+.hero-shot{border-radius:var(--r-lg);box-shadow:var(--sh-md)}
+.hero-shot img{width:100%;aspect-ratio:4/3;object-fit:cover}
 .since-card{
   position:absolute;bottom:22px;left:-12px;background:#fff;border:1px solid var(--line);
   border-radius:15px;padding:14px 19px;box-shadow:var(--sh-lg);display:flex;align-items:center;gap:14px;
@@ -214,17 +220,18 @@ section[id]{scroll-margin-top:78px}
   transition:transform var(--t),box-shadow var(--t),border-color var(--t);
 }
 .card:hover{transform:translateY(-6px);box-shadow:var(--sh-md);border-color:transparent}
-.card-img{overflow:hidden;background:var(--sand-2)}
+.card-img{overflow:hidden}
 .card-img img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform 300ms var(--ease)}
 .card:hover .card-img img{transform:scale(1.055)}
 .card-body{padding:22px 22px 24px;display:flex;flex-direction:column;gap:9px;flex:1}
 .card-body h3{font-family:"Playfair Display",Georgia,serif;font-size:var(--step-h3);font-weight:600}
 .card-body p{font-size:.88rem;color:var(--ink-3);font-weight:300;line-height:1.7}
-.card-body .ulink{margin-top:auto;padding-top:14px}
+.card-body .ulink{margin-top:auto}
 
 /* ---------- showroom story ---------- */
 .story-grid{display:grid;gap:clamp(28px,4vw,56px);align-items:center}
-.story-media img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:var(--r-lg);box-shadow:var(--sh-sm)}
+.story-media{border-radius:var(--r-lg);box-shadow:var(--sh-sm)}
+.story-media img{width:100%;aspect-ratio:3/2;object-fit:cover}
 .story-copy p + p{margin-top:15px}
 .story-list{margin-top:30px;padding-top:26px;border-top:1px solid var(--line);display:grid;gap:18px}
 .story-list li{display:grid;grid-template-columns:auto 1fr;gap:15px;align-items:baseline}
@@ -237,7 +244,7 @@ section[id]{scroll-margin-top:78px}
 
 /* ---------- lookbook ---------- */
 .look{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:130px;grid-auto-flow:row dense;gap:14px}
-.shot{overflow:hidden;border-radius:var(--r-md);position:relative;background:var(--sand-2);grid-row:span 2}
+.shot{border-radius:var(--r-md);grid-row:span 2}
 .shot--tall{grid-row:span 3}
 .shot img{width:100%;height:100%;object-fit:cover;transition:transform 300ms var(--ease)}
 .shot::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 58%,rgba(26,26,26,.26));opacity:0;transition:opacity var(--t)}
@@ -273,7 +280,7 @@ a.info:hover .v{color:var(--pink)}
 .socials a svg{width:18px;height:18px}
 .socials a:hover{color:#fff;background:var(--pink);border-color:var(--pink);transform:translateY(-3px)}
 
-.map{margin-top:26px;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh-sm);background:var(--sand-2)}
+.map{margin-top:26px;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh-sm);background:#efe9e3}
 .map iframe{display:block;width:100%;height:270px;border:0}
 
 .form-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:26px 22px;box-shadow:var(--sh-sm)}
@@ -318,20 +325,66 @@ a.info:hover .v{color:var(--pink)}
 .fab::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--pink);animation:ping 2.6s cubic-bezier(0,0,.2,1) infinite}
 @keyframes ping{0%{transform:scale(1);opacity:.55}70%,100%{transform:scale(1.5);opacity:0}}
 
+/* ---------- mobile action bar: both primary actions in thumb reach ---------- */
+.mobile-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;gap:10px;
+  padding:10px var(--pad) calc(10px + env(safe-area-inset-bottom,0px));
+  background:rgba(255,255,255,.94);
+  backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px);
+  border-top:1px solid var(--line);
+}
+.mobile-bar .btn{flex:1;min-height:50px;font-size:.95rem}
+.mobile-bar .btn--ghost{flex:0 0 40%;border-color:var(--line);background:#fff}
+
 /* ---------- reveal ---------- */
 .reveal{opacity:0;transform:translateY(20px);transition:opacity 300ms ease,transform 300ms var(--ease)}
 .reveal.in{opacity:1;transform:none}
 
+.swipe-hint{
+  display:none;align-items:center;gap:7px;margin-top:14px;
+  font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:600;
+}
+.swipe-hint svg{width:15px;height:15px;color:var(--pink)}
+
 /* ---------- breakpoints ---------- */
-@media (max-width:520px){
+@media (max-width:599px){
+  /* the FAB gives way to a full-width action bar */
+  .fab{display:none}
+  .mobile-bar{display:flex}
+  body{padding-bottom:78px}
+
   .hero-cta{flex-direction:column;align-items:stretch}
   .hero-cta .btn{width:100%}
+
+  /* collections become a swipeable rail: 4 stacked cards cost ~1800px of scroll */
+  .cards{
+    display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+    margin-inline:calc(var(--pad) * -1);padding:4px var(--pad) 8px;
+  }
+  .cards::-webkit-scrollbar{display:none}
+  .card{flex:0 0 74%;scroll-snap-align:start}
+  .swipe-hint{display:flex}
+
+  /* 16px inputs stop iOS from zooming the page on focus */
+  .field input,.field textarea{font-size:16px}
+
+  /* comfortable thumb targets on the footer link lists */
+  .foot-col a{display:inline-block;padding-block:12px}
+  .foot-col li + li{margin-top:0}
+  .foot-col li:last-child{padding-block:12px}
+
+  .hero{padding-top:22px}
+  .hero .lede{font-size:1rem}
+  .since-card{padding:12px 16px;border-radius:13px}
+  .since-card .y{font-size:1.45rem}
+  .story-list{margin-top:26px}
+  .map iframe{height:240px}
 }
 @media (max-width:400px){
   :root{--pad:16px}
   .header-in{gap:8px}
   .brand .mark{font-size:1.18rem}
-  .lang{display:none}
 }
 @media (min-width:600px){
   .cards{grid-template-columns:repeat(2,1fr)}
@@ -358,7 +411,7 @@ a.info:hover .v{color:var(--pink)}
   .header-phone{display:inline-flex}
   .hero{background:linear-gradient(180deg,var(--sand) 0%,var(--sand) 80%,var(--white) 80%)}
   .hero-grid{grid-template-columns:1fr 1.08fr}
-  .hero-media img{aspect-ratio:5/4}
+  .hero-shot img{aspect-ratio:5/4}
   .cards{grid-template-columns:repeat(4,1fr)}
   .story-grid{grid-template-columns:1.06fr 1fr}
   .story-media{order:-1}
@@ -401,8 +454,6 @@ a.info:hover .v{color:var(--pink)}
       <span>+974 6630 5397</span>
     </a>
 
-    <a class="lang" href="./index-ar.html" lang="ar" hreflang="ar">العربية</a>
-
     <a class="btn btn--primary btn--sm" href="https://wa.me/97466305397?text=Hello%20Mobilia%20Qatar%2C%20I%27d%20like%20to%20ask%20about%20the%20furniture%20you%20have%20available." target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2a.5.5 0 0 0 0-.5l-.8-1.8c-.2-.4-.4-.4-.5-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4 5.3 5.3 0 0 0 3.2.7 2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>
       <span>WhatsApp</span>
@@ -418,7 +469,6 @@ a.info:hover .v{color:var(--pink)}
     <a href="#collections">Collections</a>
     <a href="#showroom">Showroom</a>
     <a href="#visit">Visit</a>
-    <a href="./index-ar.html" lang="ar">العربية</a>
     <div class="mob-actions">
       <a class="btn btn--ghost" href="tel:+97466305397">+974 6630 5397</a>
     </div>
@@ -448,7 +498,9 @@ a.info:hover .v{color:var(--pink)}
     </div>
 
     <div class="hero-media reveal">
-      <img src="assets/hero.webp" alt="A sand-coloured sofa, oak side table and jute rug arranged in a bright living room set" width="1800" height="1350" fetchpriority="high" decoding="async">
+      <div class="ph hero-shot">
+        <img src="assets/hero.webp" alt="A sand-coloured sofa, oak side table and jute rug arranged in a bright living room set" width="1800" height="1350" fetchpriority="high" decoding="async">
+      </div>
       <div class="since-card">
         <span><span class="y display">2015</span></span>
         <span class="bar" aria-hidden="true"></span>
@@ -493,7 +545,7 @@ a.info:hover .v{color:var(--pink)}
 
     <div class="cards">
       <article class="card reveal">
-        <div class="card-img"><img src="assets/bedroom.webp" alt="An upholstered bed in oatmeal linen with oak nightstands and ceramic lamps" width="1000" height="750" loading="lazy" decoding="async"></div>
+        <div class="card-img ph"><img src="assets/bedroom.webp" alt="An upholstered bed in oatmeal linen with oak nightstands and ceramic lamps" width="1000" height="750" loading="lazy" decoding="async"></div>
         <div class="card-body">
           <h3>Bedrooms</h3>
           <p>Beds, wardrobes and nightstands in calm, hard-wearing finishes.</p>
@@ -505,7 +557,7 @@ a.info:hover .v{color:var(--pink)}
       </article>
 
       <article class="card reveal">
-        <div class="card-img"><img src="assets/majlis.webp" alt="A contemporary majlis with low bench seating in beige fabric around a carved wooden table" width="1000" height="750" loading="lazy" decoding="async"></div>
+        <div class="card-img ph"><img src="assets/majlis.webp" alt="A contemporary majlis with low bench seating in beige fabric around a carved wooden table" width="1000" height="750" loading="lazy" decoding="async"></div>
         <div class="card-body">
           <h3>Majlis</h3>
           <p>Bench seating sized to the room, in the fabric you pick.</p>
@@ -517,7 +569,7 @@ a.info:hover .v{color:var(--pink)}
       </article>
 
       <article class="card reveal">
-        <div class="card-img"><img src="assets/dining.webp" alt="A solid oak dining table with upholstered chairs under a sculptural pendant light" width="1000" height="750" loading="lazy" decoding="async"></div>
+        <div class="card-img ph"><img src="assets/dining.webp" alt="A solid oak dining table with upholstered chairs under a sculptural pendant light" width="1000" height="750" loading="lazy" decoding="async"></div>
         <div class="card-body">
           <h3>Tables &amp; chairs</h3>
           <p>Dining and side tables in oak and walnut, with matching seating.</p>
@@ -529,7 +581,7 @@ a.info:hover .v{color:var(--pink)}
       </article>
 
       <article class="card reveal">
-        <div class="card-img"><img src="assets/decor.webp" alt="Oak floating shelves styled with matte ceramic vases, a woven basket and dried branches" width="1000" height="750" loading="lazy" decoding="async"></div>
+        <div class="card-img ph"><img src="assets/decor.webp" alt="Oak floating shelves styled with matte ceramic vases, a woven basket and dried branches" width="1000" height="750" loading="lazy" decoding="async"></div>
         <div class="card-body">
           <h3>Decor</h3>
           <p>The shelves, vases, rugs and lighting that finish a room.</p>
@@ -540,13 +592,18 @@ a.info:hover .v{color:var(--pink)}
         </div>
       </article>
     </div>
+
+    <p class="swipe-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+      Swipe for more
+    </p>
   </div>
 </section>
 
 <!-- ===================== SHOWROOM STORY ===================== -->
 <section class="section section--sand" id="showroom" aria-labelledby="show-title">
   <div class="wrap story-grid">
-    <div class="story-media reveal">
+    <div class="story-media ph reveal">
       <img src="assets/showroom.webp" alt="Open display bays of sofa sets on a polished concrete showroom floor lit by daylight" width="1600" height="1067" loading="lazy" decoding="async">
     </div>
     <div class="story-copy reveal">
@@ -591,10 +648,10 @@ a.info:hover .v{color:var(--pink)}
       <p class="lede">A closer look at the materials you can choose from in store.</p>
     </div>
     <div class="look reveal">
-      <figure class="shot shot--tall"><img src="assets/armchair.webp" alt="A cream boucle armchair with a knit throw beside a slim brass floor lamp" width="900" height="1350" loading="lazy" decoding="async"></figure>
-      <figure class="shot"><img src="assets/swatches.webp" alt="A hand lifting the corner of an upholstery swatch beside fabric and wood samples" width="1200" height="800" loading="lazy" decoding="async"></figure>
-      <figure class="shot"><img src="assets/bedroom.webp" alt="Detail of linen bedding and a warm oak nightstand" width="1000" height="750" loading="lazy" decoding="async" style="object-position:70% 60%"></figure>
-      <figure class="shot"><img src="assets/majlis.webp" alt="Detail of majlis cushions and a patterned rug in sand and olive tones" width="1000" height="750" loading="lazy" decoding="async" style="object-position:30% 70%"></figure>
+      <figure class="shot shot--tall ph"><img src="assets/armchair.webp" alt="A cream boucle armchair with a knit throw beside a slim brass floor lamp" width="900" height="1350" loading="lazy" decoding="async"></figure>
+      <figure class="shot ph"><img src="assets/swatches.webp" alt="A hand lifting the corner of an upholstery swatch beside fabric and wood samples" width="1200" height="800" loading="lazy" decoding="async"></figure>
+      <figure class="shot ph"><img src="assets/bedroom.webp" alt="Detail of linen bedding and a warm oak nightstand" width="1000" height="750" loading="lazy" decoding="async" style="object-position:70% 60%"></figure>
+      <figure class="shot ph"><img src="assets/majlis.webp" alt="Detail of majlis cushions and a patterned rug in sand and olive tones" width="1000" height="750" loading="lazy" decoding="async" style="object-position:30% 70%"></figure>
     </div>
   </div>
 </section>
@@ -759,7 +816,6 @@ a.info:hover .v{color:var(--pink)}
           <li><a href="#showroom">Showroom</a></li>
           <li><a href="#lookbook">Lookbook</a></li>
           <li><a href="#visit">Visit</a></li>
-          <li><a href="./index-ar.html" lang="ar">العربية</a></li>
         </ul>
       </nav>
 
@@ -780,6 +836,17 @@ a.info:hover .v{color:var(--pink)}
     </div>
   </div>
 </footer>
+
+<nav class="mobile-bar" aria-label="Quick contact">
+  <a class="btn btn--ghost" href="tel:+97466305397">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+    Call
+  </a>
+  <a class="btn btn--primary" href="https://wa.me/97466305397?text=Hello%20Mobilia%20Qatar%2C%20I%27d%20like%20to%20ask%20about%20the%20furniture%20you%20have%20available." target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2a.5.5 0 0 0 0-.5l-.8-1.8c-.2-.4-.4-.4-.5-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4 5.3 5.3 0 0 0 3.2.7 2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>
+    WhatsApp us
+  </a>
+</nav>
 
 <a class="fab" href="https://wa.me/97466305397?text=Hello%20Mobilia%20Qatar%2C%20I%20need%20help%20choosing%20furniture." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2a.5.5 0 0 0 0-.5l-.8-1.8c-.2-.4-.4-.4-.5-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4 5.3 5.3 0 0 0 3.2.7 2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>
@@ -833,6 +900,14 @@ a.info:hover .v{color:var(--pink)}
       }
     });
   }
+
+  /* a missing photo should read as a designed tile, never a broken icon */
+  document.addEventListener("error", function(e){
+    if (e.target && e.target.tagName === "IMG") e.target.classList.add("is-missing");
+  }, true);
+  Array.prototype.forEach.call(document.images, function(img){
+    if (img.complete && img.naturalWidth === 0) img.classList.add("is-missing");
+  });
 
   var revealables = document.querySelectorAll(".reveal");
   if (reduce || !("IntersectionObserver" in window)) {

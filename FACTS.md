@@ -33,4 +33,6 @@ Compiled 2026-09-18 for the website rebuild. Every line on the site must trace t
 
 ## Explicitly NOT on the site (previously invented, now removed)
 
-The first draft carried placeholder statistics — 850 happy clients, 120 completed projects, 40 collections. None of these were verifiable. They have been removed entirely and replaced with facts from the table above.
+The first draft (Arabic, now removed) carried placeholder statistics — 850 happy clients, 120 completed projects, 40 collections. None of these were verifiable. They have been removed entirely and replaced with facts from the table above.
+
+The site is English-only. The Arabic page was removed at the owner's request.
