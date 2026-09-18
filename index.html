@@ -74,14 +74,19 @@ img{max-width:100%;height:auto;display:block}
 
 /* Every photo sits in a .ph frame. Before the image paints — or if the file is
    missing — the frame shows a warm branded tile instead of a broken icon. */
-.ph{position:relative;overflow:hidden;background:linear-gradient(135deg,#f0e9e2 0%,#e4dad0 55%,#d8cdc1 100%)}
-.ph::before{
-  content:"MOBILIA";position:absolute;inset:0;display:grid;place-items:center;
-  font-family:"Playfair Display",Georgia,serif;font-size:.72rem;font-weight:600;
-  letter-spacing:.34em;color:rgba(26,26,26,.17);text-indent:.34em;
+.ph{
+  position:relative;overflow:hidden;background:#ece5dd center/cover no-repeat;
 }
 .ph img{position:relative;z-index:1;background:transparent}
 .ph img.is-missing{visibility:hidden}
+.ph--hero{background-image:url("assets/ill-hero.svg")}
+.ph--bedroom{background-image:url("assets/ill-bedroom.svg")}
+.ph--majlis{background-image:url("assets/ill-majlis.svg")}
+.ph--dining{background-image:url("assets/ill-dining.svg")}
+.ph--decor{background-image:url("assets/ill-decor.svg")}
+.ph--showroom{background-image:url("assets/ill-showroom.svg")}
+.ph--armchair{background-image:url("assets/ill-armchair.svg")}
+.ph--swatches{background-image:url("assets/ill-swatches.svg")}
 a{color:inherit;text-decoration:none}
 button,input,textarea{font:inherit;color:inherit}
 h1,h2,h3,h4{margin:0;line-height:1.16;font-weight:600;letter-spacing:-.022em}
@@ -498,7 +503,7 @@ a.info:hover .v{color:var(--pink)}
     </div>
 
     <div class="hero-media reveal">
-      <div class="ph hero-shot">
+      <div class="ph ph--hero hero-shot">
         <img src="assets/hero.webp" alt="A sand-coloured sofa, oak side table and jute rug arranged in a bright living room set" width="1800" height="1350" fetchpriority="high" decoding="async">
       </div>
       <div class="since-card">
@@ -545,7 +550,7 @@ a.info:hover .v{color:var(--pink)}
 
     <div class="cards">
       <article class="card reveal">
-        <div class="card-img ph"><img src="assets/bedroom.webp" alt="An upholstered bed in oatmeal linen with oak nightstands and ceramic lamps" width="1000" height="750" loading="lazy" decoding="async"></div>
+        <div class="card-img ph ph--bedroom"><img src="assets/bedroom.webp" alt="An upholstered bed in oatmeal linen with oak nightstands and ceramic lamps" width="1000" height="750" loading="lazy" decoding="async"></div>
         <div class="card-body">
           <h3>Bedrooms</h3>
           <p>Beds, wardrobes and nightstands in calm, hard-wearing finishes.</p>
@@ -557,7 +562,7 @@ a.info:hover .v{color:var(--pink)}
       </article>
 
       <article class="card reveal">
-        <div class="card-img ph"><img src="assets/majlis.webp" alt="A contemporary majlis with low bench seating in beige fabric around a carved wooden table" width="1000" height="750" loading="lazy" decoding="async"></div>
+        <div class="card-img ph ph--majlis"><img src="assets/majlis.webp" alt="A contemporary majlis with low bench seating in beige fabric around a carved wooden table" width="1000" height="750" loading="lazy" decoding="async"></div>
         <div class="card-body">
           <h3>Majlis</h3>
           <p>Bench seating sized to the room, in the fabric you pick.</p>
@@ -569,7 +574,7 @@ a.info:hover .v{color:var(--pink)}
       </article>
 
       <article class="card reveal">
-        <div class="card-img ph"><img src="assets/dining.webp" alt="A solid oak dining table with upholstered chairs under a sculptural pendant light" width="1000" height="750" loading="lazy" decoding="async"></div>
+        <div class="card-img ph ph--dining"><img src="assets/dining.webp" alt="A solid oak dining table with upholstered chairs under a sculptural pendant light" width="1000" height="750" loading="lazy" decoding="async"></div>
         <div class="card-body">
           <h3>Tables &amp; chairs</h3>
           <p>Dining and side tables in oak and walnut, with matching seating.</p>
@@ -581,7 +586,7 @@ a.info:hover .v{color:var(--pink)}
       </article>
 
       <article class="card reveal">
-        <div class="card-img ph"><img src="assets/decor.webp" alt="Oak floating shelves styled with matte ceramic vases, a woven basket and dried branches" width="1000" height="750" loading="lazy" decoding="async"></div>
+        <div class="card-img ph ph--decor"><img src="assets/decor.webp" alt="Oak floating shelves styled with matte ceramic vases, a woven basket and dried branches" width="1000" height="750" loading="lazy" decoding="async"></div>
         <div class="card-body">
           <h3>Decor</h3>
           <p>The shelves, vases, rugs and lighting that finish a room.</p>
@@ -603,7 +608,7 @@ a.info:hover .v{color:var(--pink)}
 <!-- ===================== SHOWROOM STORY ===================== -->
 <section class="section section--sand" id="showroom" aria-labelledby="show-title">
   <div class="wrap story-grid">
-    <div class="story-media ph reveal">
+    <div class="story-media ph ph--showroom reveal">
       <img src="assets/showroom.webp" alt="Open display bays of sofa sets on a polished concrete showroom floor lit by daylight" width="1600" height="1067" loading="lazy" decoding="async">
     </div>
     <div class="story-copy reveal">
@@ -648,10 +653,10 @@ a.info:hover .v{color:var(--pink)}
       <p class="lede">A closer look at the materials you can choose from in store.</p>
     </div>
     <div class="look reveal">
-      <figure class="shot shot--tall ph"><img src="assets/armchair.webp" alt="A cream boucle armchair with a knit throw beside a slim brass floor lamp" width="900" height="1350" loading="lazy" decoding="async"></figure>
-      <figure class="shot ph"><img src="assets/swatches.webp" alt="A hand lifting the corner of an upholstery swatch beside fabric and wood samples" width="1200" height="800" loading="lazy" decoding="async"></figure>
-      <figure class="shot ph"><img src="assets/bedroom.webp" alt="Detail of linen bedding and a warm oak nightstand" width="1000" height="750" loading="lazy" decoding="async" style="object-position:70% 60%"></figure>
-      <figure class="shot ph"><img src="assets/majlis.webp" alt="Detail of majlis cushions and a patterned rug in sand and olive tones" width="1000" height="750" loading="lazy" decoding="async" style="object-position:30% 70%"></figure>
+      <figure class="shot shot--tall ph ph--armchair"><img src="assets/armchair.webp" alt="A cream boucle armchair with a knit throw beside a slim brass floor lamp" width="900" height="1350" loading="lazy" decoding="async"></figure>
+      <figure class="shot ph ph--swatches"><img src="assets/swatches.webp" alt="A hand lifting the corner of an upholstery swatch beside fabric and wood samples" width="1200" height="800" loading="lazy" decoding="async"></figure>
+      <figure class="shot ph ph--bedroom"><img src="assets/bedroom.webp" alt="Detail of linen bedding and a warm oak nightstand" width="1000" height="750" loading="lazy" decoding="async" style="object-position:70% 60%"></figure>
+      <figure class="shot ph ph--majlis"><img src="assets/majlis.webp" alt="Detail of majlis cushions and a patterned rug in sand and olive tones" width="1000" height="750" loading="lazy" decoding="async" style="object-position:30% 70%"></figure>
     </div>
   </div>
 </section>

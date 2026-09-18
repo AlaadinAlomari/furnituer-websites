@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" width="1000" height="750" role="img" aria-label="Illustration of a majlis seating room">
+<rect width="1000" height="750" fill="#eae3da"/>
+<g stroke="#2a2724" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".62">
+  <path d="M40 610h920"/>
+  <!-- back bench -->
+  <rect x="150" y="300" width="700" height="66" rx="10" fill="#e1d6c8"/>
+  <path d="M150 300v-90h700v90"/>
+  <path d="M255 210v90M360 210v90M465 210v90M570 210v90M675 210v90" opacity=".4"/>
+  <path d="M170 366v36M830 366v36"/>
+  <!-- side benches -->
+  <path d="M150 400l-70 44v96l70-40z" fill="#e1d6c8"/>
+  <path d="M850 400l70 44v96l-70-40z" fill="#e1d6c8"/>
+  <!-- centre table -->
+  <rect x="380" y="470" width="240" height="30" rx="8" fill="#ddd1c2"/>
+  <path d="M410 500v58M590 500v58M410 558h180"/>
+  <!-- rug -->
+  <path d="M300 620h400l60 70H240z" opacity=".45"/>
+</g>
+<g fill="#f04a7c" opacity=".9">
+  <rect x="393" y="232" width="86" height="60" rx="12"/>
+  <rect x="603" y="232" width="86" height="60" rx="12"/>
+</g>
+<g stroke="#2a2724" stroke-width="2.4" fill="none" opacity=".62">
+  <rect x="393" y="232" width="86" height="60" rx="12"/><rect x="603" y="232" width="86" height="60" rx="12"/>
+</g>
+</svg>

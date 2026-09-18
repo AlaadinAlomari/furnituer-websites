@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1350" width="900" height="1350" role="img" aria-label="Illustration of an armchair with a throw and a floor lamp">
+<rect width="900" height="1350" fill="#ede6de"/>
+<g stroke="#2a2724" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".6">
+  <path d="M60 1080h780"/>
+  <!-- floor lamp -->
+  <path d="M700 1080V560"/>
+  <path d="M636 560h128l-26-120h-76z" fill="#e4d9cb"/>
+  <path d="M652 1080h96"/>
+  <!-- armchair -->
+  <path d="M200 1080V700a44 44 0 0 1 44-44h192a44 44 0 0 1 44 44v380"/>
+  <path d="M200 860h280"/>
+  <rect x="200" y="860" width="280" height="70" rx="18" fill="#e2d7c9"/>
+  <path d="M236 1080v56M444 1080v56"/>
+  <!-- throw over the arm -->
+  <path d="M452 700c46 14 62 52 54 96-6 36-26 60-54 70" fill="#e7ddd0"/>
+  <path d="M470 736c14 18 18 40 12 62M492 754c8 14 10 30 6 44" opacity=".5"/>
+  <!-- stool with cup -->
+  <rect x="540" y="900" width="150" height="26" rx="8" fill="#ded2c3"/>
+  <path d="M566 926v154M664 926v154"/>
+  <path d="M586 900v-42h58v42M644 868h20a14 14 0 0 1 0 28h-20" />
+</g>
+<g fill="#f04a7c" opacity=".9"><rect x="252" y="676" width="122" height="66" rx="16"/></g>
+<rect x="252" y="676" width="122" height="66" rx="16" fill="none" stroke="#2a2724" stroke-width="3" opacity=".6"/>
+</svg>

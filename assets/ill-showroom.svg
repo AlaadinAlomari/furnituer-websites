@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1067" width="1600" height="1067" role="img" aria-label="Illustration of the furniture showroom floor">
+<rect width="1600" height="1067" fill="#eae4dc"/>
+<g stroke="#2a2724" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".58">
+  <!-- ceiling lights -->
+  <path d="M300 90h380M920 90h380"/>
+  <path d="M300 150h380M920 150h380" opacity=".4"/>
+  <!-- windows -->
+  <rect x="1180" y="230" width="300" height="380" rx="6"/>
+  <path d="M1330 230v380M1180 420h300"/>
+  <!-- columns -->
+  <path d="M170 200v560M1090 210v520" opacity=".5"/>
+  <!-- floor -->
+  <path d="M60 790h1480"/>
+  <path d="M240 880h1120" opacity=".3"/>
+  <!-- sofa group left -->
+  <path d="M280 790V650a24 24 0 0 1 24-24h320a24 24 0 0 1 24 24v140"/>
+  <path d="M280 704h368"/>
+  <rect x="280" y="704" width="368" height="52" rx="12" fill="#e0d5c7"/>
+  <path d="M306 790v30M622 790v30"/>
+  <!-- coffee table -->
+  <ellipse cx="464" cy="856" rx="120" ry="26"/>
+  <!-- sofa group right -->
+  <path d="M760 790V672a22 22 0 0 1 22-22h268a22 22 0 0 1 22 22v118"/>
+  <path d="M760 722h312"/>
+  <rect x="760" y="722" width="312" height="46" rx="11" fill="#e0d5c7"/>
+  <path d="M784 790v28M1048 790v28"/>
+  <!-- armchair -->
+  <path d="M1180 790V690a20 20 0 0 1 20-20h120a20 20 0 0 1 20 20v100"/>
+  <rect x="1180" y="730" width="160" height="42" rx="10" fill="#e0d5c7"/>
+</g>
+<g fill="#f04a7c" opacity=".88"><rect x="470" y="662" width="130" height="46" rx="12"/></g>
+<rect x="470" y="662" width="130" height="46" rx="12" fill="none" stroke="#2a2724" stroke-width="3" opacity=".58"/>
+</svg>

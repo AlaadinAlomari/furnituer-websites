@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-label="Illustration of a living room set">
+<rect width="1200" height="900" fill="#efe8e0"/>
+<g stroke="#2a2724" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".62">
+  <!-- window -->
+  <rect x="852" y="120" width="250" height="430" rx="6"/>
+  <path d="M977 120v430M852 335h250"/>
+  <path d="M700 560l150-120M742 600l150-120" opacity=".35"/>
+  <!-- wall art -->
+  <rect x="150" y="150" width="150" height="190" rx="4"/>
+  <path d="M170 300l45-60 38 45 30-28 27 43z"/>
+  <!-- floor -->
+  <path d="M60 700h1080"/>
+  <!-- rug -->
+  <rect x="150" y="712" width="760" height="86" rx="43" opacity=".5"/>
+  <!-- sofa -->
+  <path d="M232 700V560a26 26 0 0 1 26-26h384a26 26 0 0 1 26 26v140"/>
+  <path d="M232 618h436"/>
+  <path d="M290 534v84M450 534v84M610 534v84" opacity=".55"/>
+  <rect x="232" y="618" width="436" height="58" rx="14" fill="#e2d7c9"/>
+  <path d="M262 700v34M638 700v34"/>
+  <!-- side table -->
+  <ellipse cx="800" cy="612" rx="66" ry="17"/>
+  <path d="M800 629v71M762 700h76"/>
+  <!-- vase on table -->
+  <path d="M786 612c-6-22 4-34 14-34s20 12 14 34"/>
+  <!-- plant -->
+  <path d="M1020 700V612"/>
+  <path d="M1020 612c-38-10-52-46-44-78 30 4 52 30 44 78zM1020 612c38-16 46-54 34-84-30 10-46 40-34 84"/>
+  <path d="M986 700h68l-8 40h-52z"/>
+</g>
+<g fill="#f04a7c" opacity=".92">
+  <rect x="470" y="556" width="150" height="58" rx="14"/>
+</g>
+<g stroke="#2a2724" stroke-width="2.6" fill="none" opacity=".62"><rect x="470" y="556" width="150" height="58" rx="14"/></g>
+</svg>
