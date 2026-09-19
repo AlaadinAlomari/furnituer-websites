@@ -184,7 +184,7 @@ section[id]{scroll-margin-top:78px}
 .mobile-nav .mob-actions .btn{width:100%}
 
 /* ---------- hero ---------- */
-.hero{padding-block:clamp(28px,4vw,54px) 0;background:linear-gradient(180deg,var(--sand) 0%,var(--sand) 72%,var(--white) 72%)}
+.hero{padding-block:clamp(28px,4vw,54px) clamp(44px,6vw,88px);background:linear-gradient(180deg,var(--sand) 0%,var(--sand) 78%,var(--white) 78%)}
 .hero-grid{display:grid;gap:clamp(28px,4vw,56px);align-items:center}
 .hero h1{font-family:"Playfair Display",Georgia,serif;font-size:var(--step-hero);font-weight:500;letter-spacing:-.03em}
 .hero h1 .accent{position:relative;white-space:nowrap;font-style:italic}
@@ -353,7 +353,7 @@ a.info:hover .v{color:var(--pink)}
 .mobile-bar .btn--ghost{flex:0 0 40%;border-color:var(--line);background:#fff}
 
 /* ---------- motion ---------- */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity 420ms ease,transform 620ms var(--ease)}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 520ms ease,transform 780ms var(--ease)}
 .reveal.in{opacity:1;transform:none}
 
 /* Media reveals with a slow curtain wipe instead of a fade.
@@ -364,21 +364,25 @@ a.info:hover .v{color:var(--pink)}
 .reveal--wipe img{clip-path:inset(0 0 100% 0);transition:clip-path 900ms var(--ease)}
 .reveal--wipe.in img{clip-path:inset(0 0 0 0)}
 
+/* headings lift out of a mask as their block arrives */
+.reveal .h2{clip-path:inset(0 0 112% 0);transition:clip-path 900ms var(--ease) 90ms}
+.reveal.in .h2{clip-path:inset(0 0 -12% 0)}
+
 /* hero entrance — above the fold, so it runs on load rather than on scroll */
-@keyframes riseIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes riseIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
 @keyframes wipeIn{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
 @keyframes settleIn{from{transform:scale(1.09)}to{transform:scale(1)}}
 @keyframes popIn{from{opacity:0;transform:translateY(12px) scale(.96)}to{opacity:1;transform:none}}
 @keyframes drawLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 
-.hero-copy .eyebrow{animation:riseIn 700ms 60ms var(--ease) both}
-.hero-copy h1{animation:riseIn 820ms 170ms var(--ease) both}
-.hero-copy .lede{animation:riseIn 820ms 320ms var(--ease) both}
-.hero-cta{animation:riseIn 820ms 440ms var(--ease) both}
-.hero-shot{animation:wipeIn 1150ms 120ms var(--ease) both}
-.hero-shot img{animation:settleIn 1900ms 120ms var(--ease) both}
-.since-card{animation:popIn 700ms 820ms var(--ease) both}
-.hero h1 .accent::after{transform-origin:left center;animation:drawLine 760ms 700ms var(--ease) both}
+.hero-copy .eyebrow{animation:riseIn 760ms 120ms var(--ease) both}
+.hero-copy h1{animation:riseIn 950ms 260ms var(--ease) both}
+.hero-copy .lede{animation:riseIn 900ms 480ms var(--ease) both}
+.hero-cta{animation:riseIn 900ms 640ms var(--ease) both}
+.hero-shot{animation:wipeIn 1350ms 180ms var(--ease) both}
+.hero-shot img{animation:settleIn 2200ms 180ms var(--ease) both}
+.since-card{animation:popIn 760ms 1150ms var(--ease) both}
+.hero h1 .accent::after{transform-origin:left center;animation:drawLine 860ms 980ms var(--ease) both}
 
 /* the header lifts off the page once you start scrolling */
 .site-header{transition:box-shadow 320ms var(--ease),border-color 320ms var(--ease)}
@@ -469,7 +473,7 @@ a.info:hover .v{color:var(--pink)}
   .burger{display:none}
   .mobile-nav{display:none !important}
   .header-phone{display:inline-flex}
-  .hero{background:linear-gradient(180deg,var(--sand) 0%,var(--sand) 80%,var(--white) 80%)}
+  .hero{background:linear-gradient(180deg,var(--sand) 0%,var(--sand) 84%,var(--white) 84%)}
   .hero-grid{grid-template-columns:1fr 1.08fr}
   .hero-shot img{aspect-ratio:5/4}
   .cards{grid-template-columns:repeat(4,1fr)}
@@ -488,6 +492,7 @@ a.info:hover .v{color:var(--pink)}
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
   .reveal{opacity:1;transform:none}
   .reveal--wipe img{clip-path:none}
+  .reveal .h2{clip-path:none}
   .btn--primary::after{display:none}
 }
 </style>
@@ -1002,7 +1007,7 @@ a.info:hover .v{color:var(--pink)}
       });
     }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
     Array.prototype.forEach.call(revealables, function(el, i){
-      el.style.transitionDelay = (Math.min(i % 4, 3) * 70) + "ms";
+      el.style.transitionDelay = (Math.min(i % 4, 3) * 90) + "ms";
       io.observe(el);
     });
   }
