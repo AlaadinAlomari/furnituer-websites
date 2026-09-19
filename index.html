@@ -1053,30 +1053,32 @@ a.info:hover .v{color:var(--pink)}
     }, { passive: true });
   }
 
-  var revealables = document.querySelectorAll(".reveal");
-  if (reduce || !("IntersectionObserver" in window)) {
-    Array.prototype.forEach.call(revealables, function(el){ el.classList.add("in"); });
-  } else {
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        // also reveal anything already scrolled past, so a fast scroll never leaves a blank section
-        if (en.isIntersecting || en.boundingClientRect.top < window.innerHeight) {
-          en.target.classList.add("in");
-          io.unobserve(en.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-    Array.prototype.forEach.call(revealables, function(el, i){
-      el.style.transitionDelay = (Math.min(i % 4, 3) * 90) + "ms";
-      io.observe(el);
-    });
-  }
-
   /* Google reviews.
      Paste the real ones here, exactly as they appear on the listing — never
      write them. An empty array keeps the section hidden.
      { name, initial, rating, date, text }                                   */
-  var REVIEWS = [];
+  var REVIEWS = [
+    {
+      name: "kokilan prasanth", initial: "k", rating: 5, date: "a year ago",
+      text: "Best service and creativity in qatar. The prices are very attractive considering the superior quality of the furniture."
+    },
+    {
+      name: "Stiti Mahdi", initial: "S", rating: 5, date: "a year ago", translated: true,
+      text: "The best quality with excellent prices and classy service. I bought from them two years ago \u2014 the goods are the height of luxury and the price is reasonable. I needed a repair after the warranty had ended and they did not fall short."
+    },
+    {
+      name: "Mohamed Salah", initial: "M", rating: 5, date: "Local Guide \u00b7 a year ago", translated: true,
+      text: "Respectable people, and very helpful. After the sofa arrived I found a fault in the arm. I called them, they sent someone out, and the arm was replaced within two days."
+    },
+    {
+      name: "Ahmad Ahmad farhat", initial: "A", rating: 5, date: "a year ago", translated: true,
+      text: "Wonderful prices and outstanding service. Quality, durability and elegance. Honestly, one of the best furniture stores in Qatar\u2026"
+    },
+    {
+      name: "Issmael Aldar", initial: "I", rating: 5, date: "a year ago", translated: true,
+      text: "Heartfelt thanks to Mobilia Qatar for your wonderful service and your beautiful, sturdy furniture\u2026"
+    }
+  ];
 
   (function(){
     var sec = document.getElementById("reviews");
@@ -1129,7 +1131,7 @@ a.info:hover .v{color:var(--pink)}
       if (r.date) {
         var dt = document.createElement("span");
         dt.className = "rev-date";
-        dt.textContent = r.date;
+        dt.textContent = r.translated ? r.date + " \u00b7 translated from Arabic" : r.date;
         who.appendChild(document.createElement("br"));
         who.appendChild(dt);
       }
@@ -1143,6 +1145,28 @@ a.info:hover .v{color:var(--pink)}
     var fl = document.getElementById("footReviews");
     if (fl) fl.hidden = false;
   })();
+
+  /* Reviews are injected above this line on purpose: the observer below
+     collects .reveal elements once, so cards created later would never be
+     observed and would stay at opacity 0 forever. */
+  var revealables = document.querySelectorAll(".reveal");
+  if (reduce || !("IntersectionObserver" in window)) {
+    Array.prototype.forEach.call(revealables, function(el){ el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        // also reveal anything already scrolled past, so a fast scroll never leaves a blank section
+        if (en.isIntersecting || en.boundingClientRect.top < window.innerHeight) {
+          en.target.classList.add("in");
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    Array.prototype.forEach.call(revealables, function(el, i){
+      el.style.transitionDelay = (Math.min(i % 4, 3) * 90) + "ms";
+      io.observe(el);
+    });
+  }
 
   /* Open / closed right now, computed in Qatar time (UTC+3, no DST) */
   (function(){
