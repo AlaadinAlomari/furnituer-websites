@@ -1,58 +1,35 @@
 # assets/
 
-## How images work on this page
+## Photography
 
-Every photo slot is a `.ph` frame. The frame carries a hand-drawn SVG
-illustration as its background; the `<img>` sits on top. So:
+| File | Used by | Size |
+|---|---|---|
+| `hero.webp` | Hero | 1800×1018 |
+| `bedroom.webp` `majlis.webp` `dining.webp` `decor.webp` | Collections + lookbook | 1000×747 |
+| `showroom.webp` | Showroom section | 1600×1062 |
+| `armchair.webp` | Lookbook (tall tile) | 900×1355 |
+| `swatches.webp` | Lookbook | 1200×797 |
+| `og.jpg` | Social sharing card | 1200×630 |
 
-- **No photo file present** → the illustration shows. The page looks designed,
-  not broken.
-- **Photo file present** → it covers the illustration completely. Nothing else
-  needs changing.
+Supplied by the owner, then resized and re-encoded to WebP (quality 76) for the
+web. To swap any of them, drop in a replacement **with the same filename** —
+no code change needed. Keep roughly the same aspect ratio so the crop holds.
 
-The frame reserves the final dimensions either way, so nothing shifts on the
-page when real photos arrive.
+## Brand
 
-## Drop-in photo filenames
+| File | Used by |
+|---|---|
+| `logo-mark.png` | Header — the script wordmark alone, so it stays legible at 30px |
+| `logo.png` | Footer — the full lockup including "Quality for less. Everyday." |
+| `icon-512.png`, `apple-touch-icon.png` | Browser tab and iOS home screen, built from the logo's M |
+| `favicon.svg` | Fallback tab icon |
 
-| File | Used by | Width | Aspect |
-|---|---|---|---|
-| `hero.webp` | Hero | 1800 | 4:3 |
-| `bedroom.webp` `majlis.webp` `dining.webp` `decor.webp` | Collections + lookbook | 1000 | 4:3 |
-| `showroom.webp` | Showroom section | 1600 | 3:2 |
-| `armchair.webp` | Lookbook (tall tile) | 900 | 2:3 |
-| `swatches.webp` | Lookbook | 1200 | 3:2 |
-| `og.jpg` | Social sharing card | 1200×630 | — |
+Both logo files are transparent PNGs, keyed from the supplied artwork, so they
+sit correctly on white and on the warm footer background.
 
-Save files with exactly these names and they appear automatically. WebP is
-preferred; for JPG or PNG, either convert or update the `src` values in
-`index.html`.
+## Illustrations
 
-## Committed here
-
-- `ill-*.svg` — the eight illustrations (about 1.4 KB each)
-- `favicon.svg`
-- `fetch-assets.sh` — see below
-
-## Why there are no photographs yet
-
-Eight original photographs were generated for this site. They could not be
-downloaded into the repository: **the build environment's network policy blocks
-every external image host** — the CDN the photos were delivered on, and also
-Fal, Replicate, OpenAI, Unsplash, Pexels, Pixabay and Wikimedia. This was
-tested directly; `fetch-assets.sh` returns HTTP 403 from the egress proxy, not
-an expired-URL error. A policy block has to be reported rather than worked
-around, so no relay was built.
-
-Photographs can therefore only enter this repository from your side:
-
-1. Download the eight generated images and save them into this folder with the
-   names above, or
-2. Send them to Claude in the conversation — attachments do reach the working
-   environment, and they can be placed and committed from there, or
-3. Use your own showroom photography, which would be better than generated
-   imagery anyway.
-
-`fetch-assets.sh` is kept for use **outside** this environment: run it from a
-normal machine with internet access and it will download and convert all eight,
-as long as the temporary source URLs are still alive.
+`ill-*.svg` are line-art fallbacks — one per image slot. They sit behind each
+photo in its `.ph` frame, so if a photo file is ever missing or slow, the frame
+shows a branded illustration instead of a broken icon. They cost about 1.4 KB
+each and are worth keeping.

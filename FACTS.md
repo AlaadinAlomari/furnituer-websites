@@ -21,6 +21,8 @@ Compiled 2026-09-18 for the website rebuild. Every line on the site must trace t
 | X | https://x.com/Mobiliaqatar | Owner-supplied |
 | Official website | None found | — |
 | Rating / review count | **Unobtainable.** No verified rating found; the Yandex listing shows no reviews. | — |
+| Tagline | **"Quality for less. Everyday."** | Owner-supplied logo artwork (first-party) |
+| Logo | Script wordmark "Mobilia" + tagline lockup | Owner-supplied (`mobilia face logo.webp`) |
 | Brand colours | White / warm off-white / charcoal with a pink accent (#f04a7c) | Owner-supplied brief |
 
 ## Conflicts and gaps
@@ -36,3 +38,11 @@ Compiled 2026-09-18 for the website rebuild. Every line on the site must trace t
 The first draft (Arabic, now removed) carried placeholder statistics — 850 happy clients, 120 completed projects, 40 collections. None of these were verifiable. They have been removed entirely and replaced with facts from the table above.
 
 The site is English-only. The Arabic page was removed at the owner's request.
+
+## Imagery
+
+The eight photographs in `assets/` and the logo were supplied by the owner via
+the repository. The photographs are generated interior imagery, not documentary
+photographs of the Al Aziziya showroom, so no caption or alt text claims to
+show the actual premises. Replacing them with real showroom photography would
+strengthen the page further and needs no code change — same filenames.
