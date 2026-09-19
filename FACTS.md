@@ -32,7 +32,8 @@ Compiled 2026-09-18 for the website rebuild. Every line on the site must trace t
 - **No rating is published.** Per the research rules an unverifiable rating is omitted rather than invented. The trust strip uses verified facts instead (established 2015, Al Aziziya location, made-to-order service, delivery & installation).
 - **The landline needs confirmation.** +974 4029 8546 appears in directory listings but was not supplied by the owner.
 - **A "MOBILIA FURNITURE" storefront exists on noon.com.** It could not be confirmed as the same business, so it is not linked from the site.
-- **No customer testimonials are published.** No verifiable public reviews were found, and inventing them is not an option.
+- **No customer testimonials are published yet.** No verifiable public reviews were found, and inventing them is not an option. A reviews section exists in the page but renders only from a `REVIEWS` array that ships empty, so the section stays hidden until real review text is pasted in. Selecting the best *real* reviews is ordinary marketing and fine; writing them is not.
+- **No `aggregateRating` in the JSON-LD.** Google's structured-data policy treats ratings a business collects and marks up about itself as self-serving, and they are ignored or penalised. If an overall rating is ever shown on the page it stays out of the markup.
 
 ## Explicitly NOT on the site (previously invented, now removed)
 

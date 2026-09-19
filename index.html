@@ -266,6 +266,32 @@ section[id]{scroll-margin-top:78px}
 .why h3{font-size:1.02rem;font-weight:600;margin-bottom:5px}
 .why p{font-size:.89rem;color:var(--ink-3);font-weight:300;line-height:1.75;max-width:52ch}
 
+/* ---------- reviews ---------- */
+.rev-head{display:flex;flex-wrap:wrap;align-items:flex-end;gap:18px 32px;justify-content:space-between;margin-bottom:clamp(28px,4vw,44px)}
+.rev-src{display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--ink-3)}
+.rev-src svg{width:19px;height:19px;flex:none}
+.rev-grid{display:grid;gap:18px}
+.rev{
+  display:flex;flex-direction:column;gap:14px;background:#fff;border:1px solid var(--line);
+  border-radius:var(--r-lg);padding:26px 24px;
+  transition:transform var(--t),box-shadow var(--t),border-color var(--t);
+}
+.rev:hover{transform:translateY(-5px);box-shadow:var(--sh-md);border-color:transparent}
+.stars{display:flex;gap:3px;color:#f0a830}
+.stars svg{width:17px;height:17px}
+.rev-text{font-size:.96rem;line-height:1.75;color:var(--ink-2);font-weight:300}
+.rev-text::before{content:"\201C"}
+.rev-text::after{content:"\201D"}
+.rev-by{display:flex;align-items:center;gap:12px;margin-top:auto;padding-top:4px}
+.rev-av{
+  width:40px;height:40px;border-radius:50%;flex:none;display:grid;place-items:center;
+  background:var(--sand-2);color:var(--ink-2);font-weight:600;font-size:.95rem;
+  font-family:"Playfair Display",Georgia,serif;
+}
+.rev-name{font-weight:600;font-size:.92rem;line-height:1.3}
+.rev-date{font-size:.78rem;color:var(--ink-3)}
+.rev-cta{margin-top:clamp(26px,3vw,38px);display:flex;justify-content:center}
+
 /* ---------- visit ---------- */
 .visit-grid{display:grid;gap:clamp(28px,4vw,44px)}
 .info-list{display:grid;gap:18px;margin-bottom:26px}
@@ -428,6 +454,13 @@ a.info:hover .v{color:var(--pink)}
   }
   .cards::-webkit-scrollbar{display:none}
   .card{flex:0 0 74%;scroll-snap-align:start}
+  .rev-grid{
+    display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+    margin-inline:calc(var(--pad) * -1);padding:4px var(--pad) 8px;
+  }
+  .rev-grid::-webkit-scrollbar{display:none}
+  .rev{flex:0 0 82%;scroll-snap-align:start}
   .swipe-hint{display:flex}
 
   /* 16px inputs stop iOS from zooming the page on focus */
@@ -451,6 +484,7 @@ a.info:hover .v{color:var(--pink)}
   .brand-logo{height:26px}
 }
 @media (min-width:600px){
+  .rev-grid{grid-template-columns:repeat(2,1fr)}
   .cards{grid-template-columns:repeat(2,1fr)}
   /* one tile per column: a staggered strip with no empty cells */
   .look{grid-template-columns:repeat(4,1fr);grid-auto-rows:150px}
@@ -470,6 +504,7 @@ a.info:hover .v{color:var(--pink)}
   .foot-grid{grid-template-columns:1.5fr 1fr 1fr}
 }
 @media (min-width:980px){
+  .rev-grid{grid-template-columns:repeat(3,1fr)}
   .burger{display:none}
   .mobile-nav{display:none !important}
   .header-phone{display:inline-flex}
@@ -759,6 +794,30 @@ a.info:hover .v{color:var(--pink)}
   </div>
 </section>
 
+<!-- ===================== REVIEWS ===================== -->
+<!-- Rendered from the REVIEWS array in the script below. Empty array = the
+     whole section stays hidden, so no placeholder text can ever ship. -->
+<section class="section" id="reviews" aria-labelledby="rev-title" hidden>
+  <div class="wrap">
+    <div class="rev-head reveal">
+      <div class="sec-head" style="margin-bottom:0">
+        <span class="eyebrow">Reviews</span>
+        <h2 class="h2" id="rev-title">What customers say</h2>
+      </div>
+      <p class="rev-src">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.2a5.3 5.3 0 0 1-2.3 3.5v2.9h3.7c2.2-2 3.4-5 3.4-8.6z"/><path fill="#34A853" d="M12 23.5c3.1 0 5.7-1 7.6-2.8l-3.7-2.9a7 7 0 0 1-10.4-3.7H1.7v3A11.5 11.5 0 0 0 12 23.5z"/><path fill="#FBBC05" d="M5.5 14.1a6.8 6.8 0 0 1 0-4.4v-3H1.7a11.5 11.5 0 0 0 0 10.4z"/><path fill="#EA4335" d="M12 5.4c1.7 0 3.2.6 4.4 1.7l3.3-3.3A11.5 11.5 0 0 0 1.7 6.7l3.8 3a6.9 6.9 0 0 1 6.5-4.3z"/></svg>
+        <span>From our Google reviews</span>
+      </p>
+    </div>
+
+    <div class="rev-grid" id="revGrid"></div>
+
+    <div class="rev-cta reveal">
+      <a class="btn btn--ghost" href="https://www.google.com/maps/place/Mobilia+Qatar/@25.2511153,51.4509846,17z/data=!3m1!4b1!4m6!3m5!1s0x3e45da12df2855a7:0xccfecb1bcb2dc00c!8m2!3d25.2511153!4d51.4509846" target="_blank" rel="noopener">Read all reviews on Google</a>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== VISIT ===================== -->
 <section class="section" id="visit" aria-labelledby="visit-title">
   <div class="wrap">
@@ -881,6 +940,7 @@ a.info:hover .v{color:var(--pink)}
           <li><a href="#collections">Collections</a></li>
           <li><a href="#showroom">Showroom</a></li>
           <li><a href="#lookbook">Lookbook</a></li>
+          <li><a href="#reviews" id="footReviews" hidden>Reviews</a></li>
           <li><a href="#visit">Visit</a></li>
         </ul>
       </nav>
@@ -1011,6 +1071,78 @@ a.info:hover .v{color:var(--pink)}
       io.observe(el);
     });
   }
+
+  /* Google reviews.
+     Paste the real ones here, exactly as they appear on the listing — never
+     write them. An empty array keeps the section hidden.
+     { name, initial, rating, date, text }                                   */
+  var REVIEWS = [];
+
+  (function(){
+    var sec = document.getElementById("reviews");
+    var grid = document.getElementById("revGrid");
+    if (!sec || !grid || !REVIEWS.length) return;
+
+    function star(filled){
+      var svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+      svg.setAttribute("viewBox","0 0 24 24");
+      svg.setAttribute("aria-hidden","true");
+      var pth = document.createElementNS("http://www.w3.org/2000/svg","path");
+      pth.setAttribute("d","M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.4L12 17.4 6.2 20.4l1.1-6.4L2.6 9.4l6.5-.9z");
+      pth.setAttribute("fill", filled ? "currentColor" : "none");
+      pth.setAttribute("stroke","currentColor");
+      pth.setAttribute("stroke-width","1.5");
+      svg.appendChild(pth);
+      return svg;
+    }
+
+    REVIEWS.forEach(function(r, i){
+      var card = document.createElement("article");
+      card.className = "rev reveal";
+      card.style.transitionDelay = (Math.min(i, 3) * 90) + "ms";
+
+      var stars = document.createElement("div");
+      stars.className = "stars";
+      var n = Math.max(0, Math.min(5, r.rating || 5));
+      for (var k = 0; k < 5; k++) stars.appendChild(star(k < n));
+      stars.setAttribute("role","img");
+      stars.setAttribute("aria-label", n + " out of 5 stars");
+      card.appendChild(stars);
+
+      var p = document.createElement("p");
+      p.className = "rev-text";
+      p.textContent = r.text;                    // textContent, never innerHTML
+      card.appendChild(p);
+
+      var by = document.createElement("div");
+      by.className = "rev-by";
+      var av = document.createElement("span");
+      av.className = "rev-av";
+      av.setAttribute("aria-hidden","true");
+      av.textContent = r.initial || (r.name || "?").trim().charAt(0).toUpperCase();
+      by.appendChild(av);
+      var who = document.createElement("span");
+      var nm = document.createElement("span");
+      nm.className = "rev-name";
+      nm.textContent = r.name;
+      who.appendChild(nm);
+      if (r.date) {
+        var dt = document.createElement("span");
+        dt.className = "rev-date";
+        dt.textContent = r.date;
+        who.appendChild(document.createElement("br"));
+        who.appendChild(dt);
+      }
+      by.appendChild(who);
+      card.appendChild(by);
+
+      grid.appendChild(card);
+    });
+
+    sec.hidden = false;
+    var fl = document.getElementById("footReviews");
+    if (fl) fl.hidden = false;
+  })();
 
   /* Open / closed right now, computed in Qatar time (UTC+3, no DST) */
   (function(){
