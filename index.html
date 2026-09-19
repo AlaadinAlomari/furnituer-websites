@@ -1057,25 +1057,30 @@ a.info:hover .v{color:var(--pink)}
      Paste the real ones here, exactly as they appear on the listing — never
      write them. An empty array keeps the section hidden.
      { name, initial, rating, date, text }                                   */
+  /* Real Google reviews, owner-supplied, ordered strongest first.
+     Dates are deliberately not shown — they are all about a year old and the
+     timestamps made the page feel stale. REVIEWS_SHOWN caps how many render;
+     raise it to surface the rest.                                          */
+  var REVIEWS_SHOWN = 3;
   var REVIEWS = [
     {
-      name: "kokilan prasanth", initial: "k", rating: 5, date: "a year ago",
+      name: "kokilan prasanth", initial: "k", rating: 5,
       text: "Best service and creativity in qatar. The prices are very attractive considering the superior quality of the furniture."
     },
     {
-      name: "Stiti Mahdi", initial: "S", rating: 5, date: "a year ago", translated: true,
-      text: "The best quality with excellent prices and classy service. I bought from them two years ago \u2014 the goods are the height of luxury and the price is reasonable. I needed a repair after the warranty had ended and they did not fall short."
-    },
-    {
-      name: "Mohamed Salah", initial: "M", rating: 5, date: "Local Guide \u00b7 a year ago", translated: true,
+      name: "Mohamed Salah", initial: "M", rating: 5, localGuide: true, translated: true,
       text: "Respectable people, and very helpful. After the sofa arrived I found a fault in the arm. I called them, they sent someone out, and the arm was replaced within two days."
     },
     {
-      name: "Ahmad Ahmad farhat", initial: "A", rating: 5, date: "a year ago", translated: true,
+      name: "Stiti Mahdi", initial: "S", rating: 5, translated: true,
+      text: "The best quality with excellent prices and classy service. I bought from them two years ago \u2014 the goods are the height of luxury and the price is reasonable. I needed a repair after the warranty had ended and they did not fall short."
+    },
+    {
+      name: "Ahmad Ahmad farhat", initial: "A", rating: 5, translated: true,
       text: "Wonderful prices and outstanding service. Quality, durability and elegance. Honestly, one of the best furniture stores in Qatar\u2026"
     },
     {
-      name: "Issmael Aldar", initial: "I", rating: 5, date: "a year ago", translated: true,
+      name: "Issmael Aldar", initial: "I", rating: 5, translated: true,
       text: "Heartfelt thanks to Mobilia Qatar for your wonderful service and your beautiful, sturdy furniture\u2026"
     }
   ];
@@ -1083,7 +1088,8 @@ a.info:hover .v{color:var(--pink)}
   (function(){
     var sec = document.getElementById("reviews");
     var grid = document.getElementById("revGrid");
-    if (!sec || !grid || !REVIEWS.length) return;
+    var shown = REVIEWS.slice(0, REVIEWS_SHOWN);
+    if (!sec || !grid || !shown.length) return;
 
     function star(filled){
       var svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
@@ -1098,7 +1104,7 @@ a.info:hover .v{color:var(--pink)}
       return svg;
     }
 
-    REVIEWS.forEach(function(r, i){
+    shown.forEach(function(r, i){
       var card = document.createElement("article");
       card.className = "rev reveal";
       card.style.transitionDelay = (Math.min(i, 3) * 90) + "ms";
@@ -1128,10 +1134,13 @@ a.info:hover .v{color:var(--pink)}
       nm.className = "rev-name";
       nm.textContent = r.name;
       who.appendChild(nm);
-      if (r.date) {
+      var meta = [];
+      if (r.localGuide) meta.push("Local Guide");
+      if (r.translated) meta.push("translated from Arabic");
+      if (meta.length) {
         var dt = document.createElement("span");
         dt.className = "rev-date";
-        dt.textContent = r.translated ? r.date + " \u00b7 translated from Arabic" : r.date;
+        dt.textContent = meta.join(" \u00b7 ");
         who.appendChild(document.createElement("br"));
         who.appendChild(dt);
       }
