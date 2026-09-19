@@ -198,7 +198,7 @@ section[id]{scroll-margin-top:78px}
 .hero-shot{border-radius:var(--r-lg);box-shadow:var(--sh-md)}
 .hero-shot img{width:100%;aspect-ratio:4/3;object-fit:cover}
 .since-card{
-  position:absolute;bottom:22px;left:-12px;background:#fff;border:1px solid var(--line);
+  position:absolute;z-index:2;bottom:22px;left:-12px;background:#fff;border:1px solid var(--line);
   border-radius:15px;padding:14px 19px;box-shadow:var(--sh-lg);display:flex;align-items:center;gap:14px;
 }
 .since-card .y{font-family:"Playfair Display",Georgia,serif;font-size:1.65rem;font-weight:600;line-height:1;letter-spacing:-.01em}
@@ -275,6 +275,17 @@ section[id]{scroll-margin-top:78px}
 .info .k{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);font-weight:600;display:block}
 .info .v{font-weight:500;font-size:.98rem;transition:color var(--t);display:inline-block;margin-top:2px}
 .info .v small{display:block;font-size:.83rem;font-weight:300;color:var(--ink-3);margin-top:3px;line-height:1.6}
+.hours{margin:6px 0 0;display:grid;gap:5px}
+.hours div{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.hours dt{font-size:.9rem;font-weight:500;min-width:11.5em}
+.hours dd{margin:0;font-size:.9rem;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.open-now{
+  display:inline-flex;align-items:center;gap:7px;margin-top:2px;
+  font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+}
+.open-now::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.open-now[data-open="yes"]{color:#1d8a4e}
+.open-now[data-open="no"]{color:var(--ink-3)}
 a.info:hover .v{color:var(--pink)}
 
 .socials{display:flex;gap:10px;flex-wrap:wrap}
@@ -341,9 +352,53 @@ a.info:hover .v{color:var(--pink)}
 .mobile-bar .btn{flex:1;min-height:50px;font-size:.95rem}
 .mobile-bar .btn--ghost{flex:0 0 40%;border-color:var(--line);background:#fff}
 
-/* ---------- reveal ---------- */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity 300ms ease,transform 300ms var(--ease)}
+/* ---------- motion ---------- */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 420ms ease,transform 620ms var(--ease)}
 .reveal.in{opacity:1;transform:none}
+
+/* Media reveals with a slow curtain wipe instead of a fade.
+   The clip sits on the image, never on the observed frame: clipping the frame
+   itself to zero area makes IntersectionObserver report a 0% ratio, so a
+   threshold above 0 would never fire and the tile would stay hidden. */
+.reveal--wipe{opacity:1;transform:none}
+.reveal--wipe img{clip-path:inset(0 0 100% 0);transition:clip-path 900ms var(--ease)}
+.reveal--wipe.in img{clip-path:inset(0 0 0 0)}
+
+/* hero entrance — above the fold, so it runs on load rather than on scroll */
+@keyframes riseIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes wipeIn{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes settleIn{from{transform:scale(1.09)}to{transform:scale(1)}}
+@keyframes popIn{from{opacity:0;transform:translateY(12px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes drawLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+.hero-copy .eyebrow{animation:riseIn 700ms 60ms var(--ease) both}
+.hero-copy h1{animation:riseIn 820ms 170ms var(--ease) both}
+.hero-copy .lede{animation:riseIn 820ms 320ms var(--ease) both}
+.hero-cta{animation:riseIn 820ms 440ms var(--ease) both}
+.hero-shot{animation:wipeIn 1150ms 120ms var(--ease) both}
+.hero-shot img{animation:settleIn 1900ms 120ms var(--ease) both}
+.since-card{animation:popIn 700ms 820ms var(--ease) both}
+.hero h1 .accent::after{transform-origin:left center;animation:drawLine 760ms 700ms var(--ease) both}
+
+/* the header lifts off the page once you start scrolling */
+.site-header{transition:box-shadow 320ms var(--ease),border-color 320ms var(--ease)}
+.header-in{transition:min-height 320ms var(--ease)}
+.site-header.scrolled{box-shadow:0 10px 30px -22px rgba(26,26,26,.55);border-color:transparent}
+.site-header.scrolled .header-in{min-height:60px}
+
+/* a single slow sheen across the primary button, pointer devices only */
+@media (hover:hover) and (pointer:fine){
+  .btn--primary{position:relative;overflow:hidden;isolation:isolate}
+  .btn--primary::after{
+    content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;
+    background:linear-gradient(105deg,transparent 36%,rgba(255,255,255,.4) 50%,transparent 64%);
+    transform:translateX(-130%);transition:transform 780ms var(--ease);
+  }
+  .btn--primary:hover::after{transform:translateX(130%)}
+  .card-img img{transition:transform 620ms var(--ease)}
+  .card:hover .card-img img{transform:scale(1.07)}
+  .shot img{transition:transform 640ms var(--ease)}
+}
 
 .swipe-hint{
   display:none;align-items:center;gap:7px;margin-top:14px;
@@ -432,6 +487,8 @@ a.info:hover .v{color:var(--pink)}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
   .reveal{opacity:1;transform:none}
+  .reveal--wipe img{clip-path:none}
+  .btn--primary::after{display:none}
 }
 </style>
 </head>
@@ -485,7 +542,7 @@ a.info:hover .v{color:var(--pink)}
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="home" aria-labelledby="hero-title">
   <div class="wrap hero-grid">
-    <div class="hero-copy reveal">
+    <div class="hero-copy">
       <span class="eyebrow">Quality for less. Everyday.</span>
       <h1 id="hero-title" class="display">Furniture built<br>around <span class="accent">your room</span></h1>
       <p class="lede">A furniture showroom in Al Aziziya since 2015 — take a piece home ready-made, or have it made to your sizes and your fabric.</p>
@@ -496,13 +553,9 @@ a.info:hover .v{color:var(--pink)}
         </a>
         <a class="btn btn--ghost" href="#lookbook">See the showroom</a>
       </div>
-      <p class="hero-meta">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Al Aziziya Road, Zone 55 — beside Aziziyah Pharmacy
-      </p>
     </div>
 
-    <div class="hero-media reveal">
+    <div class="hero-media">
       <div class="ph ph--hero hero-shot">
         <img src="assets/hero.webp" alt="A boucle sofa, oak side table and jute rug arranged in a bright living room set" width="1800" height="1018" fetchpriority="high" decoding="async">
       </div>
@@ -550,7 +603,7 @@ a.info:hover .v{color:var(--pink)}
 
     <div class="cards">
       <article class="card reveal">
-        <div class="card-img ph ph--bedroom"><img src="assets/bedroom.webp" alt="An upholstered bed in oatmeal linen with oak nightstands and ceramic lamps" width="1000" height="747" loading="lazy" decoding="async"></div>
+        <div class="card-img ph reveal reveal--wipe ph--bedroom"><img src="assets/bedroom.webp" alt="An upholstered bed in oatmeal linen with oak nightstands and ceramic lamps" width="1000" height="747" loading="lazy" decoding="async"></div>
         <div class="card-body">
           <h3>Bedrooms</h3>
           <p>Beds, wardrobes and nightstands in calm, hard-wearing finishes.</p>
@@ -562,7 +615,7 @@ a.info:hover .v{color:var(--pink)}
       </article>
 
       <article class="card reveal">
-        <div class="card-img ph ph--majlis"><img src="assets/majlis.webp" alt="A contemporary majlis with low bench seating in beige fabric around a carved wooden table" width="1000" height="747" loading="lazy" decoding="async"></div>
+        <div class="card-img ph reveal reveal--wipe ph--majlis"><img src="assets/majlis.webp" alt="A contemporary majlis with low bench seating in beige fabric around a carved wooden table" width="1000" height="747" loading="lazy" decoding="async"></div>
         <div class="card-body">
           <h3>Majlis</h3>
           <p>Bench seating sized to the room, in the fabric you pick.</p>
@@ -574,7 +627,7 @@ a.info:hover .v{color:var(--pink)}
       </article>
 
       <article class="card reveal">
-        <div class="card-img ph ph--dining"><img src="assets/dining.webp" alt="A solid oak dining table with upholstered chairs under a sculptural pendant light" width="1000" height="747" loading="lazy" decoding="async"></div>
+        <div class="card-img ph reveal reveal--wipe ph--dining"><img src="assets/dining.webp" alt="A solid oak dining table with upholstered chairs under a sculptural pendant light" width="1000" height="747" loading="lazy" decoding="async"></div>
         <div class="card-body">
           <h3>Tables &amp; chairs</h3>
           <p>Dining and side tables in oak and walnut, with matching seating.</p>
@@ -586,7 +639,7 @@ a.info:hover .v{color:var(--pink)}
       </article>
 
       <article class="card reveal">
-        <div class="card-img ph ph--decor"><img src="assets/decor.webp" alt="Oak floating shelves styled with matte ceramic vases, a woven basket and dried branches" width="1000" height="747" loading="lazy" decoding="async"></div>
+        <div class="card-img ph reveal reveal--wipe ph--decor"><img src="assets/decor.webp" alt="Oak floating shelves styled with matte ceramic vases, a woven basket and dried branches" width="1000" height="747" loading="lazy" decoding="async"></div>
         <div class="card-body">
           <h3>Decor</h3>
           <p>The shelves, vases, rugs and lighting that finish a room.</p>
@@ -608,7 +661,7 @@ a.info:hover .v{color:var(--pink)}
 <!-- ===================== SHOWROOM STORY ===================== -->
 <section class="section section--sand" id="showroom" aria-labelledby="show-title">
   <div class="wrap story-grid">
-    <div class="story-media ph ph--showroom reveal">
+    <div class="story-media ph ph--showroom reveal reveal--wipe">
       <img src="assets/showroom.webp" alt="Open display bays of sofa sets on a polished showroom floor lit by daylight" width="1600" height="1062" loading="lazy" decoding="async">
     </div>
     <div class="story-copy reveal">
@@ -652,11 +705,11 @@ a.info:hover .v{color:var(--pink)}
       <h2 class="h2" id="look-title">Pieces, textures, finishes</h2>
       <p class="lede">A closer look at the materials you can choose from in store.</p>
     </div>
-    <div class="look reveal">
-      <figure class="shot shot--tall ph ph--armchair"><img src="assets/armchair.webp" alt="A cream boucle armchair with a knit throw beside a small oak stool" width="900" height="1355" loading="lazy" decoding="async"></figure>
-      <figure class="shot ph ph--swatches"><img src="assets/swatches.webp" alt="A hand lifting the corner of an upholstery swatch beside fabric and wood samples" width="1200" height="797" loading="lazy" decoding="async"></figure>
-      <figure class="shot ph ph--bedroom"><img src="assets/bedroom.webp" alt="Detail of linen bedding and a warm oak nightstand" width="1000" height="747" loading="lazy" decoding="async" style="object-position:70% 60%"></figure>
-      <figure class="shot ph ph--majlis"><img src="assets/majlis.webp" alt="Detail of majlis cushions and a patterned rug in sand and olive tones" width="1000" height="747" loading="lazy" decoding="async" style="object-position:30% 70%"></figure>
+    <div class="look">
+      <figure class="shot shot--tall ph ph--armchair reveal reveal--wipe"><img src="assets/armchair.webp" alt="A cream boucle armchair with a knit throw beside a small oak stool" width="900" height="1355" loading="lazy" decoding="async"></figure>
+      <figure class="shot ph ph--swatches reveal reveal--wipe"><img src="assets/swatches.webp" alt="A hand lifting the corner of an upholstery swatch beside fabric and wood samples" width="1200" height="797" loading="lazy" decoding="async"></figure>
+      <figure class="shot ph ph--bedroom reveal reveal--wipe"><img src="assets/bedroom.webp" alt="Detail of linen bedding and a warm oak nightstand" width="1000" height="747" loading="lazy" decoding="async" style="object-position:70% 60%"></figure>
+      <figure class="shot ph ph--majlis reveal reveal--wipe"><img src="assets/majlis.webp" alt="Detail of majlis cushions and a patterned rug in sand and olive tones" width="1000" height="747" loading="lazy" decoding="async" style="object-position:30% 70%"></figure>
     </div>
   </div>
 </section>
@@ -707,7 +760,7 @@ a.info:hover .v{color:var(--pink)}
     <div class="sec-head reveal">
       <span class="eyebrow">Visit us</span>
       <h2 class="h2" id="visit-title">Come and sit on it</h2>
-      <p class="lede">The showroom is on Al Aziziya Road, beside Aziziyah Pharmacy. Message us before you set off and we'll confirm today's hours.</p>
+      <p class="lede">Walk the floor, sit on the pieces and see the fabrics in daylight before you decide.</p>
     </div>
 
     <div class="visit-grid">
@@ -728,14 +781,17 @@ a.info:hover .v{color:var(--pink)}
             <span><span class="k">Email</span><span class="v">mobilia.furnitureqa@gmail.com</span></span>
           </a>
 
-          <!-- Opening hours are deliberately not published: the two public listings
-               disagree (Sat–Thu 12:00–20:00 / Fri 17:00–21:00 vs 10:00–21:00 daily)
-               and neither is first-party. Replace this block with the real hours
-               once confirmed — see FACTS.md. -->
-          <a class="info" href="https://wa.me/97466305397?text=Hello%20Mobilia%20Qatar%2C%20could%20you%20tell%20me%20today%27s%20showroom%20opening%20hours%3F" target="_blank" rel="noopener">
+          <div class="info">
             <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-            <span><span class="k">Opening hours</span><span class="v">Message us for today's hours<small>We'll reply on WhatsApp</small></span></span>
-          </a>
+            <span>
+              <span class="k">Opening hours</span>
+              <span class="v" id="openState" hidden></span>
+              <dl class="hours">
+                <div><dt>Saturday – Thursday</dt><dd>10:00 AM – 9:00 PM</dd></div>
+                <div><dt>Friday</dt><dd>4:00 PM – 9:00 PM</dd></div>
+              </dl>
+            </span>
+          </div>
         </address>
 
         <h3 class="eyebrow eyebrow--muted" style="margin-bottom:12px">Follow</h3>
@@ -875,6 +931,10 @@ a.info:hover .v{color:var(--pink)}
     "addressCountry":"QA"
   },
   "geo":{"@type":"GeoCoordinates","latitude":25.2511153,"longitude":51.4509846},
+  "openingHoursSpecification":[
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday"],"opens":"10:00","closes":"21:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Friday"],"opens":"16:00","closes":"21:00"}
+  ],
   "sameAs":[
     "https://www.instagram.com/mobilia_qatar/",
     "https://www.facebook.com/mobilia.qatar/",
@@ -915,6 +975,19 @@ a.info:hover .v{color:var(--pink)}
     if (img.complete && img.naturalWidth === 0) img.classList.add("is-missing");
   });
 
+  var header = document.querySelector(".site-header");
+  if (header && !reduce) {
+    var ticking = false;
+    window.addEventListener("scroll", function(){
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function(){
+        header.classList.toggle("scrolled", window.scrollY > 24);
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
   var revealables = document.querySelectorAll(".reveal");
   if (reduce || !("IntersectionObserver" in window)) {
     Array.prototype.forEach.call(revealables, function(el){ el.classList.add("in"); });
@@ -933,6 +1006,21 @@ a.info:hover .v{color:var(--pink)}
       io.observe(el);
     });
   }
+
+  /* Open / closed right now, computed in Qatar time (UTC+3, no DST) */
+  (function(){
+    var el = document.getElementById("openState");
+    if (!el) return;
+    var now = new Date(Date.now() + (new Date().getTimezoneOffset() * 60000) + (3 * 3600000));
+    var day = now.getDay();            // 0 Sun .. 5 Fri .. 6 Sat
+    var mins = now.getHours() * 60 + now.getMinutes();
+    var open = day === 5 ? (mins >= 16 * 60 && mins < 21 * 60)
+                         : (mins >= 10 * 60 && mins < 21 * 60);
+    el.hidden = false;
+    el.className = "open-now";
+    el.setAttribute("data-open", open ? "yes" : "no");
+    el.textContent = open ? "Open now" : "Closed now";
+  })();
 
   var form = document.getElementById("waForm");
   if (form) {

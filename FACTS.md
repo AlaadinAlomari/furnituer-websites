@@ -20,6 +20,7 @@ Compiled 2026-09-18 for the website rebuild. Every line on the site must trace t
 | Snapchat | https://www.snapchat.com/@mobilia.qatar | Owner-supplied |
 | X | https://x.com/Mobiliaqatar | Owner-supplied |
 | Official website | None found | — |
+| Opening hours | Sat–Thu 10:00–21:00 · Fri 16:00–21:00 | **Owner-confirmed** (supersedes the conflicting directory listings) |
 | Rating / review count | **Unobtainable.** No verified rating found; the Yandex listing shows no reviews. | — |
 | Tagline | **"Quality for less. Everyday."** | Owner-supplied logo artwork (first-party) |
 | Logo | Script wordmark "Mobilia" + tagline lockup | Owner-supplied (`mobilia face logo.webp`) |
@@ -27,7 +28,7 @@ Compiled 2026-09-18 for the website rebuild. Every line on the site must trace t
 
 ## Conflicts and gaps
 
-- **Opening hours conflict across sources.** One listing gives Sat–Thu 12:00–20:00 with Fri 17:00–21:00; another gives 10:00–21:00 daily. Neither is first-party and neither could be confirmed, so **no hours are published on the site**. The contact block invites visitors to message for current hours, and the HTML carries a comment showing where to insert them once confirmed.
+- **Opening hours — resolved.** Two directory listings disagreed (Sat–Thu 12:00–20:00 / Fri 17:00–21:00 vs 10:00–21:00 daily), so nothing was published at first. The owner has since confirmed **Sat–Thu 10:00–21:00, Fri 16:00–21:00**, which is now on the page, in the JSON-LD `openingHoursSpecification`, and behind a live "Open now / Closed now" badge computed in Qatar time (UTC+3).
 - **No rating is published.** Per the research rules an unverifiable rating is omitted rather than invented. The trust strip uses verified facts instead (established 2015, Al Aziziya location, made-to-order service, delivery & installation).
 - **The landline needs confirmation.** +974 4029 8546 appears in directory listings but was not supplied by the owner.
 - **A "MOBILIA FURNITURE" storefront exists on noon.com.** It could not be confirmed as the same business, so it is not linked from the site.
