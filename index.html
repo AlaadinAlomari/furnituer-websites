@@ -335,13 +335,46 @@ a.info:hover .v{color:var(--pink)}
 
 .map{margin-top:26px;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh-sm);background:#efe9e3}
 /* full-bleed map closing the section */
-.map--full{
-  margin:clamp(42px,6vw,72px) 0 0;border-radius:0;border-inline:0;border-bottom:0;
-  border-top:1px solid var(--line);box-shadow:none;
+/* Framed map: a sand mat ring around it, the way a photograph is matted,
+   with the address card floating on one corner like the hero's year card. */
+.map-frame{position:relative;margin-top:clamp(46px,6vw,78px)}
+.map--framed{
+  margin:0;border-radius:clamp(18px,2.2vw,28px);overflow:hidden;
+  border:1px solid var(--line);
+  box-shadow:0 0 0 clamp(6px,1vw,14px) var(--sand), var(--sh-md);
 }
-/* the map closes the section, so no trailing padding below it */
-#visit{padding-bottom:0}
-.map--full iframe{height:clamp(300px,42vw,460px)}
+.map-frame .map--framed iframe{height:clamp(280px,38vw,470px)}
+
+.map-card{
+  display:flex;gap:14px;align-items:flex-start;
+  background:#fff;border:1px solid var(--line);border-radius:18px;
+  padding:18px 22px;box-shadow:var(--sh-lg);
+  margin:18px auto 0;max-width:420px;
+  transition:transform var(--t),box-shadow var(--t);
+}
+.map-card:hover{transform:translateY(-3px)}
+.map-card-ico{
+  width:42px;height:42px;border-radius:12px;flex:none;display:grid;place-items:center;
+  background:var(--pink-soft);color:var(--pink);
+}
+.map-card-ico svg{width:19px;height:19px}
+.map-card-body{display:flex;flex-direction:column;gap:3px}
+.map-card .k{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.map-card .v{font-weight:600;font-size:.98rem;line-height:1.4}
+.map-card .go{
+  display:inline-flex;align-items:center;gap:6px;margin-top:6px;
+  font-size:.85rem;font-weight:600;color:var(--pink);
+}
+.map-card .go svg{width:13px;height:13px;transition:transform var(--t)}
+.map-card:hover .go svg{transform:translateX(4px)}
+
+@media (min-width:768px){
+  /* on wider screens the card lifts onto the map itself */
+  .map-card{
+    position:absolute;left:clamp(24px,3vw,44px);bottom:clamp(24px,3vw,44px);
+    margin:0;max-width:340px;
+  }
+}
 .visit-form{align-self:start}
 .map iframe{display:block;width:100%;height:270px;border:0}
 
@@ -949,11 +982,28 @@ a.info:hover .v{color:var(--pink)}
     </div>
   </div>
 
-  <div class="map map--full reveal reveal--wipe">
-    <iframe
-      src="https://www.google.com/maps?q=25.2511153,51.4509846&amp;z=16&amp;hl=en&amp;output=embed"
-      title="Map showing Mobilia Qatar on Al Aziziya Road, Doha"
-      loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+  <div class="wrap">
+    <div class="map-frame reveal">
+      <div class="map map--framed">
+        <iframe
+          src="https://www.google.com/maps?q=25.2511153,51.4509846&amp;z=16&amp;hl=en&amp;output=embed"
+          title="Map showing Mobilia Qatar on Al Aziziya Road, Doha"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+
+      <a class="map-card" href="https://www.google.com/maps/dir/?api=1&amp;destination=Mobilia%20Qatar%2C%20Al%20Aziziya%20Road%2C%20Zone%2055%2C%20Doha%2C%20Qatar" target="_blank" rel="noopener">
+        <span class="map-card-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </span>
+        <span class="map-card-body">
+          <span class="k">The showroom</span>
+          <span class="v">Al Aziziya Road, Zone 55</span>
+          <span class="go">Get directions
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+          </span>
+        </span>
+      </a>
+    </div>
   </div>
 </section>
 
