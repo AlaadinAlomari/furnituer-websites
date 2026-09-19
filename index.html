@@ -334,6 +334,15 @@ a.info:hover .v{color:var(--pink)}
 .socials a:hover{color:#fff;background:var(--pink);border-color:var(--pink);transform:translateY(-3px)}
 
 .map{margin-top:26px;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh-sm);background:#efe9e3}
+/* full-bleed map closing the section */
+.map--full{
+  margin:clamp(42px,6vw,72px) 0 0;border-radius:0;border-inline:0;border-bottom:0;
+  border-top:1px solid var(--line);box-shadow:none;
+}
+/* the map closes the section, so no trailing padding below it */
+#visit{padding-bottom:0}
+.map--full iframe{height:clamp(300px,42vw,460px)}
+.visit-form{align-self:start}
 .map iframe{display:block;width:100%;height:270px;border:0}
 
 .form-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:26px 22px;box-shadow:var(--sh-sm)}
@@ -529,7 +538,7 @@ a.info:hover .v{color:var(--pink)}
 @media (min-width:768px){
   :root{--pad:28px}
   .form-card{padding:32px 30px}
-  .visit-grid{grid-template-columns:1fr 1fr}
+  .visit-grid{grid-template-columns:1.05fr .95fr;align-items:start}
   .why li{grid-template-columns:auto 1fr;gap:22px}
   .foot-grid{grid-template-columns:1.5fr 1fr 1fr}
 }
@@ -854,7 +863,7 @@ a.info:hover .v{color:var(--pink)}
     <div class="rev-grid" id="revGrid"></div>
 
     <div class="rev-cta reveal">
-      <a class="btn btn--ghost" href="https://www.google.com/maps/place/Mobilia+Qatar/@25.2511153,51.4509846,17z/data=!3m1!4b1!4m6!3m5!1s0x3e45da12df2855a7:0xccfecb1bcb2dc00c!8m2!3d25.2511153!4d51.4509846" target="_blank" rel="noopener">Read all reviews on Google</a>
+      <a class="btn btn--ghost" href="https://www.google.com/maps/place/Mobilia+Qatar/@25.2511153,51.4509846,17z/data=!4m8!3m7!1s0x3e45da12df2855a7:0xccfecb1bcb2dc00c!8m2!3d25.2511153!4d51.4509846!9m1!1b1!16s%2Fg%2F11c2l21l9s?hl=en-QA" target="_blank" rel="noopener">Read all reviews on Google</a>
     </div>
   </div>
 </section>
@@ -862,14 +871,14 @@ a.info:hover .v{color:var(--pink)}
 <!-- ===================== VISIT ===================== -->
 <section class="section" id="visit" aria-labelledby="visit-title">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Visit us</span>
-      <h2 class="h2" id="visit-title">Come and sit on it</h2>
-      <p class="lede">Walk the floor, sit on the pieces and see the fabrics in daylight before you decide.</p>
-    </div>
-
     <div class="visit-grid">
       <div class="reveal">
+        <div class="sec-head">
+          <span class="eyebrow">Visit us</span>
+          <h2 class="h2" id="visit-title">Come and sit on it</h2>
+          <p class="lede">Walk the floor, sit on the pieces and see the fabrics in daylight before you decide.</p>
+        </div>
+
         <address class="info-list" style="font-style:normal">
           <a class="info" href="https://www.google.com/maps/dir/?api=1&amp;destination=Mobilia%20Qatar%2C%20Al%20Aziziya%20Road%2C%20Zone%2055%2C%20Doha%2C%20Qatar" target="_blank" rel="noopener">
             <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
@@ -915,15 +924,10 @@ a.info:hover .v{color:var(--pink)}
           </a>
         </div>
 
-        <div class="map">
-          <iframe
-            src="https://www.google.com/maps?q=25.2511153,51.4509846&amp;z=16&amp;hl=en&amp;output=embed"
-            title="Map showing Mobilia Qatar on Al Aziziya Road, Doha"
-            loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-        </div>
+
       </div>
 
-      <div class="reveal">
+      <div class="reveal visit-form">
         <form class="form-card" id="waForm" novalidate>
           <h3 class="h2" style="font-size:1.35rem;margin-bottom:6px">Send us the room</h3>
           <p style="font-size:.88rem;color:var(--ink-3);font-weight:300;margin-bottom:22px;line-height:1.7">Tell us what you're looking for and we'll reply with options and prices.</p>
@@ -943,6 +947,13 @@ a.info:hover .v{color:var(--pink)}
         </form>
       </div>
     </div>
+  </div>
+
+  <div class="map map--full reveal reveal--wipe">
+    <iframe
+      src="https://www.google.com/maps?q=25.2511153,51.4509846&amp;z=16&amp;hl=en&amp;output=embed"
+      title="Map showing Mobilia Qatar on Al Aziziya Road, Doha"
+      loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
   </div>
 </section>
 
