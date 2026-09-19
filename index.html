@@ -184,7 +184,17 @@ section[id]{scroll-margin-top:78px}
 .mobile-nav .mob-actions .btn{width:100%}
 
 /* ---------- hero ---------- */
-.hero{padding-block:clamp(28px,4vw,54px) clamp(44px,6vw,88px);background:linear-gradient(180deg,var(--sand) 0%,var(--sand) 78%,var(--white) 78%)}
+.hero{
+  position:relative;overflow:hidden;background:var(--sand);
+  padding-block:clamp(28px,4vw,54px) clamp(92px,12vw,150px);
+}
+/* two layers drifting at different speeds so the edge never reads as a cut */
+.hero-wave{position:absolute;left:0;right:0;bottom:-1px;height:clamp(58px,8vw,104px);pointer-events:none;line-height:0}
+.hero-wave svg{display:block;width:200%;height:100%}
+.hero-wave path{will-change:transform}
+.wave-back{fill:var(--sand-2);animation:drift 26s linear infinite}
+.wave-front{fill:var(--white);animation:drift 17s linear infinite}
+@keyframes drift{from{transform:translateX(0)}to{transform:translateX(-720px)}}
 .hero-grid{display:grid;gap:clamp(28px,4vw,56px);align-items:center}
 .hero h1{font-family:"Playfair Display",Georgia,serif;font-size:var(--step-hero);font-weight:500;letter-spacing:-.03em}
 .hero h1 .accent{position:relative;white-space:nowrap;font-style:italic}
@@ -378,6 +388,26 @@ a.info:hover .v{color:var(--pink)}
 .mobile-bar .btn{flex:1;min-height:50px;font-size:.95rem}
 .mobile-bar .btn--ghost{flex:0 0 40%;border-color:var(--line);background:#fff}
 
+/* a hairline progress bar across the top of the header */
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;transform:scaleX(0);transform-origin:0 50%;background:var(--pink);opacity:.9}
+
+/* trust strip items arrive one after another */
+.trust li{opacity:0;transform:translateY(14px);transition:opacity 480ms ease,transform 640ms var(--ease)}
+.trust.in li{opacity:1;transform:none}
+.trust.in li:nth-child(1){transition-delay:0ms}
+.trust.in li:nth-child(2){transition-delay:90ms}
+.trust.in li:nth-child(3){transition-delay:180ms}
+.trust.in li:nth-child(4){transition-delay:270ms}
+
+/* a gentle press on every button */
+.btn:active{transform:translateY(1px) scale(.985)}
+
+/* numbered steps in the showroom story count in from the side */
+.story-list li{opacity:0;transform:translateX(-16px);transition:opacity 500ms ease,transform 700ms var(--ease)}
+.story-copy.in .story-list li{opacity:1;transform:none}
+.story-copy.in .story-list li:nth-child(2){transition-delay:110ms}
+.story-copy.in .story-list li:nth-child(3){transition-delay:220ms}
+
 /* ---------- motion ---------- */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity 520ms ease,transform 780ms var(--ease)}
 .reveal.in{opacity:1;transform:none}
@@ -508,7 +538,7 @@ a.info:hover .v{color:var(--pink)}
   .burger{display:none}
   .mobile-nav{display:none !important}
   .header-phone{display:inline-flex}
-  .hero{background:linear-gradient(180deg,var(--sand) 0%,var(--sand) 84%,var(--white) 84%)}
+
   .hero-grid{grid-template-columns:1fr 1.08fr}
   .hero-shot img{aspect-ratio:5/4}
   .cards{grid-template-columns:repeat(4,1fr)}
@@ -524,6 +554,9 @@ a.info:hover .v{color:var(--pink)}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
+  .wave-back,.wave-front{animation:none}
+  .trust li,.story-list li{opacity:1;transform:none}
+  .progress{display:none}
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
   .reveal{opacity:1;transform:none}
   .reveal--wipe img{clip-path:none}
@@ -536,7 +569,8 @@ a.info:hover .v{color:var(--pink)}
 <a class="skip" href="#main">Skip to main content</a>
 
 <header class="site-header">
-  <div class="wrap header-in">
+  <span class="progress" id="progress" aria-hidden="true"></span>
+    <div class="wrap header-in">
     <a class="brand" href="#home" aria-label="Mobilia Qatar — home">
       <img class="brand-logo" src="assets/logo-mark.png" alt="Mobilia" width="360" height="141" fetchpriority="high">
       <span class="sub">Qatar</span>
@@ -605,6 +639,13 @@ a.info:hover .v{color:var(--pink)}
         <span class="k">Furnishing<br>homes in Qatar</span>
       </div>
     </div>
+  </div>
+
+  <div class="hero-wave" aria-hidden="true">
+    <svg viewBox="0 0 2880 140" preserveAspectRatio="none">
+      <path class="wave-back" d="M0,54 c90,-28 270,-28 360,0 c90,28 270,28 360,0 c90,-28 270,-28 360,0 c90,28 270,28 360,0 c90,-28 270,-28 360,0 c90,28 270,28 360,0 c90,-28 270,-28 360,0 c90,28 270,28 360,0 L2880,140 L0,140 Z"/>
+      <path class="wave-front" d="M0,72 c90,-36 270,-36 360,0 c90,36 270,36 360,0 c90,-36 270,-36 360,0 c90,36 270,36 360,0 c90,-36 270,-36 360,0 c90,36 270,36 360,0 c90,-36 270,-36 360,0 c90,36 270,36 360,0 L2880,140 L0,140 Z"/>
+    </svg>
   </div>
 </section>
 
@@ -702,7 +743,7 @@ a.info:hover .v{color:var(--pink)}
 <section class="section section--sand" id="showroom" aria-labelledby="show-title">
   <div class="wrap story-grid">
     <div class="story-media ph ph--showroom reveal reveal--wipe">
-      <img src="assets/showroom.webp" alt="Open display bays of sofa sets on a polished showroom floor lit by daylight" width="1600" height="1062" loading="lazy" decoding="async">
+      <img data-parallax="0.04" src="assets/showroom.webp" alt="Open display bays of sofa sets on a polished showroom floor lit by daylight" width="1600" height="1062" loading="lazy" decoding="async">
     </div>
     <div class="story-copy reveal">
       <span class="eyebrow">The showroom</span>
@@ -746,7 +787,7 @@ a.info:hover .v{color:var(--pink)}
       <p class="lede">A closer look at the materials you can choose from in store.</p>
     </div>
     <div class="look">
-      <figure class="shot shot--tall ph ph--armchair reveal reveal--wipe"><img src="assets/armchair.webp" alt="A cream boucle armchair with a knit throw beside a small oak stool" width="900" height="1355" loading="lazy" decoding="async"></figure>
+      <figure class="shot shot--tall ph ph--armchair reveal reveal--wipe"><img data-parallax="0.05" src="assets/armchair.webp" alt="A cream boucle armchair with a knit throw beside a small oak stool" width="900" height="1355" loading="lazy" decoding="async"></figure>
       <figure class="shot ph ph--swatches reveal reveal--wipe"><img src="assets/swatches.webp" alt="A hand lifting the corner of an upholstery swatch beside fabric and wood samples" width="1200" height="797" loading="lazy" decoding="async"></figure>
       <figure class="shot ph ph--bedroom reveal reveal--wipe"><img src="assets/bedroom.webp" alt="Detail of linen bedding and a warm oak nightstand" width="1000" height="747" loading="lazy" decoding="async" style="object-position:70% 60%"></figure>
       <figure class="shot ph ph--majlis reveal reveal--wipe"><img src="assets/majlis.webp" alt="Detail of majlis cushions and a patterned rug in sand and olive tones" width="1000" height="747" loading="lazy" decoding="async" style="object-position:30% 70%"></figure>
@@ -889,10 +930,6 @@ a.info:hover .v{color:var(--pink)}
           <div class="field">
             <label for="fname">Name</label>
             <input id="fname" name="name" type="text" autocomplete="name" placeholder="Your name" required>
-          </div>
-          <div class="field">
-            <label for="fphone">Phone <span class="opt">(optional)</span></label>
-            <input id="fphone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+974 ...">
           </div>
           <div class="field">
             <label for="fmsg">What are you looking for?</label>
@@ -1041,17 +1078,54 @@ a.info:hover .v{color:var(--pink)}
   });
 
   var header = document.querySelector(".site-header");
-  if (header && !reduce) {
+  var progress = document.getElementById("progress");
+  var parallax = reduce ? [] : [].slice.call(document.querySelectorAll("[data-parallax]"));
+
+  if (!reduce) {
     var ticking = false;
-    window.addEventListener("scroll", function(){
+    var onScroll = function(){
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(function(){
-        header.classList.toggle("scrolled", window.scrollY > 24);
+        var y = window.scrollY || window.pageYOffset;
+        if (header) header.classList.toggle("scrolled", y > 24);
+        if (progress) {
+          var max = document.documentElement.scrollHeight - window.innerHeight;
+          progress.style.transform = "scaleX(" + (max > 0 ? Math.min(y / max, 1) : 0) + ")";
+        }
+        /* a small counter-drift on a couple of images; transform only */
+        for (var i = 0; i < parallax.length; i++) {
+          var el = parallax[i], r = el.getBoundingClientRect();
+          if (r.bottom < 0 || r.top > window.innerHeight) continue;
+          var mid = r.top + r.height / 2 - window.innerHeight / 2;
+          var amt = parseFloat(el.getAttribute("data-parallax")) || 0.05;
+          el.style.transform = "translate3d(0," + (-mid * amt).toFixed(2) + "px,0)";
+        }
         ticking = false;
       });
-    }, { passive: true });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    onScroll();
   }
+
+  /* the trust strip and the story steps need their own observed wrappers */
+  (function(){
+    var extra = [document.querySelector(".trust"), document.querySelector(".story-copy")].filter(Boolean);
+    if (reduce || !("IntersectionObserver" in window)) {
+      extra.forEach(function(el){ el.classList.add("in"); });
+      return;
+    }
+    var eio = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting || en.boundingClientRect.top < window.innerHeight) {
+          en.target.classList.add("in");
+          eio.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.2, rootMargin: "0px 0px -6% 0px" });
+    extra.forEach(function(el){ eio.observe(el); });
+  })();
 
   /* Google reviews.
      Paste the real ones here, exactly as they appear on the listing — never
@@ -1196,11 +1270,11 @@ a.info:hover .v{color:var(--pink)}
   if (form) {
     form.addEventListener("submit", function(e){
       e.preventDefault();
+      /* No phone field: the message opens in WhatsApp, which already carries
+         the sender's number. */
       var elName = form.elements.namedItem("name");
-      var elPhone = form.elements.namedItem("phone");
       var elMsg = form.elements.namedItem("message");
       var name = elName.value.trim();
-      var phone = elPhone.value.trim();
       var msg = elMsg.value.trim();
       var note = document.getElementById("formNote");
 
@@ -1212,7 +1286,6 @@ a.info:hover .v{color:var(--pink)}
 
       var text = "Hello Mobilia Qatar,\n" +
                  "Name: " + name + "\n" +
-                 (phone ? "Phone: " + phone + "\n" : "") +
                  "Looking for: " + msg;
 
       if (note) { note.textContent = "This opens WhatsApp with your message ready to send."; note.style.color = ""; }
