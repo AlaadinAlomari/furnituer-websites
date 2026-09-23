@@ -19,13 +19,16 @@ no code change needed. Keep roughly the same aspect ratio so the crop holds.
 
 | File | Used by |
 |---|---|
+| `mobilia-logo-pink.png` | Master artwork as supplied — the source the three files below are cut from |
 | `logo-mark.png` | Header — the script wordmark alone, so it stays legible at 30px |
 | `logo.png` | Footer — the full lockup including "Quality for less. Everyday." |
-| `icon-512.png`, `apple-touch-icon.png` | Browser tab and iOS home screen, built from the logo's M |
+| `icon-512.png`, `apple-touch-icon.png` | Browser tab and iOS home screen, the M on charcoal |
 | `favicon.svg` | Fallback tab icon |
 
-Both logo files are transparent PNGs, keyed from the supplied artwork, so they
-sit correctly on white and on the warm footer background.
+All are transparent PNGs, so they sit correctly on white and on the warm
+footer background. To change the logo again, drop a new master in and re-cut:
+trim the transparency, split at the gap between the script and the tagline
+block for the header mark, and resize to 360px and 460px wide.
 
 ## Illustrations
 
