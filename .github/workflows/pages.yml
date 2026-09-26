@@ -24,11 +24,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # enablement:true switches Pages on if it is currently off,
-      # so the repository needs no manual setup first
+      # Pages must already be switched on, with Source set to "GitHub Actions",
+      # under Settings -> Pages. Creating the Pages site itself is repository
+      # administration and the Actions token is not allowed to do it:
+      # "Create Pages site failed. Error: Resource not accessible by integration".
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       # publish only what the site serves — FACTS.md is a working document
       # and stays out of the deployed folder
