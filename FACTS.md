@@ -39,6 +39,19 @@ Compiled 2026-09-18 for the website rebuild. Every line on the site must trace t
   Review dates are not displayed. All five are about a year old and the timestamps made the page read as stale. Nothing false results — no date is claimed at all — and the link to the live listing shows them in full.
 - **No `aggregateRating` in the JSON-LD.** Google's structured-data policy treats ratings a business collects and marks up about itself as self-serving, and they are ignored or penalised. If an overall rating is ever shown on the page it stays out of the markup.
 
+## Removed from the showroom section
+
+The section previously said Mobilia opened "out of a simple gap in the market"
+and that good furniture in Qatar was "either expensive or hard to find". That
+origin narrative was never verified — the underlying listing text supports the
+2015 date and the outlet format, not the motivation behind them. It is gone.
+The section now states only: a showroom in Al Aziziya open since 2015, that
+you can walk the floor and compare styles, that pieces are ready-made or made
+to measure, and that it serves homes and commercial spaces.
+
+An "Our story" placeholder sits below it, marked as unfinished, waiting for
+the owner's own words.
+
 ## Explicitly NOT on the site (previously invented, now removed)
 
 The first draft (Arabic, now removed) carried placeholder statistics — 850 happy clients, 120 completed projects, 40 collections. None of these were verifiable. They have been removed entirely and replaced with facts from the table above.

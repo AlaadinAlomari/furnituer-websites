@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mobilia Qatar — Furniture Showroom in Al Aziziya, Doha</title>
 <meta name="description" content="Furniture showroom in Al Aziziya, Doha. Ready-made and made-to-order bedrooms, majlis, tables and decor, with delivery and installation across Qatar. Open since 2015.">
+<meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/icon-512.png" sizes="512x512" type="image/png">
@@ -257,6 +258,19 @@ section[id]{scroll-margin-top:78px}
 }
 .story-list h3{font-size:.98rem;font-weight:600;margin-bottom:3px}
 .story-list p{font-size:.87rem;color:var(--ink-3);font-weight:300;line-height:1.7}
+
+/* ---------- "Our story" placeholder ---------- */
+.section-tight{padding-block:clamp(34px,5vw,58px)}
+.soon{
+  border:1.5px dashed var(--line);border-radius:var(--r-lg);
+  padding:clamp(24px,3.4vw,38px);background:transparent;box-shadow:none;
+  text-align:center;
+}
+.soon-title{
+  font-family:"Playfair Display",Georgia,serif;font-size:1.25rem;font-weight:600;
+  color:var(--ink-3);margin-bottom:8px;
+}
+.soon-note{font-size:.92rem;font-weight:300;color:var(--ink-3);line-height:1.7}
 
 /* ---------- lookbook ---------- */
 .look{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:130px;grid-auto-flow:row dense;gap:14px}
@@ -790,8 +804,8 @@ a.info:hover .v{color:var(--pink)}
     <div class="story-copy reveal">
       <span class="eyebrow">The showroom</span>
       <h2 class="h2" id="show-title">An outlet you can walk through</h2>
-      <p class="lede" style="margin-top:16px">Mobilia opened in 2015, out of a simple gap in the market: good furniture in Qatar was either expensive or hard to find. The answer was an outlet where you can walk the floor, sit on the pieces and see a few different living styles side by side — for homes and for commercial spaces alike.</p>
-      <p class="lede">If nothing on the floor is quite right, the same pieces can be made to your measurements and your choice of fabric and wood.</p>
+      <p class="lede" style="margin-top:16px">A furniture showroom in Al Aziziya, Doha, open since 2015. Walk the floor, sit on the pieces and compare styles side by side — for homes and for commercial spaces.</p>
+      <p class="lede">Pieces are available ready-made, or made to your measurements and your choice of fabric and wood.</p>
 
       <ol class="story-list">
         <li>
@@ -816,6 +830,17 @@ a.info:hover .v{color:var(--pink)}
           </span>
         </li>
       </ol>
+    </div>
+  </div>
+</section>
+
+<!-- Placeholder: awaiting the owner's own words. Styled as deliberately
+     unfinished so it cannot be mistaken for finished copy or a broken block. -->
+<section class="section-tight" aria-labelledby="story-soon">
+  <div class="wrap">
+    <div class="soon reveal">
+      <h2 class="soon-title" id="story-soon">Our story</h2>
+      <p class="soon-note">This section will carry Mobilia's own story, in the owner's words.</p>
     </div>
   </div>
 </section>
